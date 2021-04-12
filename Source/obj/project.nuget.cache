@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "5vp3HkNwqgLIQZeKp/b3DX6Z+HJMF1T1lm1J8xhq7SMkzxM0HtcDZyXfrWQdK/1Df5fPMlKu/WRiApyE3sJVlw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lanen\\source\\repos\\sa\\Source\\Engine.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lanen\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.asio\\2.0.0\\naudio.asio.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.core\\2.0.0\\naudio.core.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.lame\\2.0.0\\naudio.lame.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.midi\\2.0.0\\naudio.midi.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.wasapi\\2.0.0\\naudio.wasapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.winmm\\2.0.0\\naudio.winmm.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
