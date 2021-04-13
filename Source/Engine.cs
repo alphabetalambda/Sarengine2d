@@ -1,15 +1,27 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 
-namespace Engine
+namespace Sar_engine
 {
     class Engine
     {
-        class Menu
+        public static string curFile = @"./save.sav";
+        public static string state = "00000";
+        public static int readspeed = 2000;
+        public static string gamename = "Saris Unbounded";
+        public class Startup
+        {
+            static void Start()
+            {
+                Console.WriteLine("Powered By SAR Engine");
+            }
+        }
+        public class Menu
         {
             //Drawing the diffrent sections of the menu
             public static void Drawmenu(string[] topin)
@@ -27,8 +39,8 @@ namespace Engine
             }
             static void Drawmenumid()
             {
-                string curtime = DateTime.Now.ToString("en-US");
-                Console.Write("The current time is:");
+                var curtime = DateTime.Now.ToString();
+                Console.Write("The current time is: ");
                 Console.WriteLine(curtime);
             }
             static void Drawmenubot()
@@ -41,53 +53,119 @@ namespace Engine
                 }
                 Console.WriteLine();
             }
+        }
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
-            class Userinput
+        public class Userinput
+        {
+            //functions to gather the diffrent types of user inputs
+            public static int GetInt32number(int limitlow, int limithigh)
             {
-                //functions to gather the diffrent types of user inputs
-                public static int Int32number(int limitlow, int limithigh)
+                Console.WriteLine("Please enter a number:");
+                string input;
+                input = Console.ReadLine();
+                bool canparse;
+                int number;
+                canparse = int.TryParse(input, out int num);
+                int limithighp = limithigh + 1;
+                int limitlowp = limitlow + 1;
+                if (canparse == true)
                 {
-                    Console.WriteLine("Please enter a number:");
-                    string input;
+                    number = int.Parse(input);
+                    if (number < limitlowp - 1)
+                    {
+                        canparse = false;
+                    }
+                    if (number > limithighp + 1)
+                    {
+                        canparse = false;
+                    }
+                }
+                while (canparse == false)
+                {
+                    Console.WriteLine("Please enter a valid number:");
                     input = Console.ReadLine();
-                    bool canparse;
-                    int number;
-                    canparse = int.TryParse(input , out int num);
-                    if(canparse == true)
+                    canparse = int.TryParse(input, out num);
+                    if (canparse == true)
                     {
                         number = int.Parse(input);
-                        if(number <= limitlow )
+                        if (number < limitlowp)
                         {
                             canparse = false;
                         }
-                        if(number >= limithigh)
+                        if (number > limithighp)
                         {
                             canparse = false;
                         }
                     }
-                    while(canparse == false)
-                    {
-                        Console.WriteLine("Please enter a valid number:");
-                        input = Console.ReadLine();
-                        canparse = int.TryParse(input, out num);
-                        if (canparse == true)
-                        {
-                            number = int.Parse(input);
-                            if (number <= limitlow)
-                            {
-                                canparse = false;
-                            }
-                            if (number >= limithigh)
-                            {
-                                canparse = false;
-                            }
-                        }
-                    }
-                    number = int.Parse(input);
-                    return number;
+                }
+                number = int.Parse(input);
+                return number;
+            }
+            public static string GetString()
+            {
+                Console.WriteLine("input");
+                string output = Console.ReadLine();
+                return output;
+            }
+        }
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
+        public class Savesystem
+        {
+            static void Save()
+            {
+                try
+                {
+                    string readspeedsave = readspeed.ToString();
+                    string[] lines = { state, readspeedsave };
+                    File.WriteAllLines(curFile, lines);
+                    //SUG.Program.savegame();
+                }
+                catch (System.IO.IOException savee1)
+                {
+                    System.Console.WriteLine("WARNING the following error is not part of the game!");
+                    System.Console.WriteLine("I/O error: Failed to save file");
+                    System.Console.WriteLine(savee1);
                 }
             }
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
+            static void Load()
+            {
+                bool exsistingsave = File.Exists(curFile);
+                //haha now andrew cant bully me for haveing no catch here
+                switch (exsistingsave)
+                {
+                    case true:
+                        string[] lines2 = File.ReadAllLines(curFile);
+                        System.IO.StreamReader readingFile = new System.IO.StreamReader(curFile);
+                        state = readingFile.ReadLine();
+                        string readspeedstring = readingFile.ReadLine();
+                        try
+                        {
+                            readspeed = Int32.Parse(readspeedstring);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("unable to Parse");
+                        }
+                        Console.WriteLine("Welcome back to Saris Unbounded");
+                        readingFile.Close();
+                        break;
+                    case false:
+                        //first time running
+                        Console.Write("Welcome to ");
+                        Console.WriteLine(gamename);
+                        Console.WriteLine("This seems to be the first time your playing the game so lets get some things set up");
+                        Console.WriteLine("what is the speed(in ms) that lines should progress automaticaly?");
+                        state = "00000";
+                        readspeed = Sar_engine.Engine.Userinput.GetInt32number(0,10000);
+                        Save();
+                        //SUG.Program.savegame(); old save function on the legacy 1 version
+                        break;
+                }
+            }
+        }
+        public class sound
+        {
+
         }
     }
 }
