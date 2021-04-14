@@ -82,7 +82,7 @@ namespace Sar_engine
                 try
                 {
                     Engine.sound.musicintent = 3;
-                    var tickreader = new WaveFileReader("tick.wav");
+                    var tickreader = new WaveFileReader("./sounds/tick.wav");
                     var tick = new WaveOutEvent(); // or WaveOutEvent()
                     tick.Init(tickreader);
                     tick.Play();
