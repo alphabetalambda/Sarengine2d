@@ -14,6 +14,8 @@ namespace Sar_engine
             musicthread.Start();
             string[] logo = { " ______   __  __     ______     ______    ", @"/\  == \ /\_\_\_\   /\  __ \   /\  ___\   ", @"\ \  _-/ \/_/\_\/_  \ \ \/\ \  \ \___  \  ", @" \ \_\     /\_\/\_\  \ \_____\  \/\_____\ ", @"  \/_/     \/_/\/_/   \/_____/   \/_____/   Version:8.6" };
             Engine.screen.Drawmenu(logo);
+            char[] title = { 'l', 'o', 'l' };
+            Engine.screen.titlecard(title);
         }
     }
 }

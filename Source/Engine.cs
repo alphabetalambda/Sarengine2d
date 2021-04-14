@@ -70,7 +70,7 @@ namespace Sar_engine
             static void Drawmenubot()
             {
                 int width = Console.WindowWidth;
-                int repeat = width + 1;
+                int repeat = width;
                 for (int i = 0; i < repeat; i++)
                 {
                     Console.Write("_");
@@ -82,14 +82,14 @@ namespace Sar_engine
                 try
                 {
                     Engine.sound.musicintent = 3;
-                    var tickreader = new WaveFileReader("./sounds/tick.wav");
+                    var tickreader = new WaveFileReader("./s/tick.wav");
                     var tick = new WaveOutEvent(); // or WaveOutEvent()
                     tick.Init(tickreader);
                     tick.Play();
                     foreach (var item in title)
                     {
                         Console.WriteLine(item);
-                        tickreader.Seek(0,0)
+                        tickreader.Seek(0, 0);
                     }
 
                 }
@@ -227,7 +227,7 @@ namespace Sar_engine
                 var musicout = new WaveOutEvent();
                 try
                 {
-                    var musicthemereader = new WaveFileReader("./sounds/theme.wav");
+                    var musicthemereader = new WaveFileReader("./s/theme.wav");
                     if (Debug.IsDebug == true)
                     {
                         Console.WriteLine("music thread started");
