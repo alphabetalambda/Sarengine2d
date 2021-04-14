@@ -45,7 +45,7 @@ namespace Sar_engine
                 Console.WriteLine("Powered By SAR Engine");
             }
         }
-        public class Menu
+        public class screen
         {
             //Drawing the diffrent sections of the menu
             public static void Drawmenu(string[] topin)
@@ -76,6 +76,36 @@ namespace Sar_engine
                     Console.Write("_");
                 }
                 Console.WriteLine();
+            }
+            public static void titlecard(char[] title)
+            {
+                try
+                {
+                    Engine.sound.musicintent = 3;
+                    var tickreader = new WaveFileReader("tick.wav");
+                    var tick = new WaveOutEvent(); // or WaveOutEvent()
+                    tick.Init(tickreader);
+                    tick.Play();
+                    foreach (var item in title)
+                    {
+                        Console.WriteLine(item);
+                        tickreader.Seek(0,0)
+                    }
+
+                }
+                catch (System.IO.DirectoryNotFoundException)
+                {
+                    Console.WriteLine("error the sounds folder was not found");
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    Console.WriteLine("error the sound was not found");
+                }
+            }
+            public static void writetext(string text)
+            {
+                Console.WriteLine(text);
+                System.Threading.Thread.Sleep(readspeed);
             }
         }
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
@@ -195,32 +225,46 @@ namespace Sar_engine
                 musicintent = 1;
                 var themelen = new System.TimeSpan(0, 0, 59);
                 var musicout = new WaveOutEvent();
-                var musicthemereader = new WaveFileReader("./sounds/theme.wav");
-                Console.WriteLine("music thread started");
-                while (true)
+                try
                 {
-                    if (musicthemereader.CurrentTime == themelen)
+                    var musicthemereader = new WaveFileReader("./sounds/theme.wav");
+                    if (Debug.IsDebug == true)
                     {
-                        musicintent = 2;
+                        Console.WriteLine("music thread started");
                     }
-                    switch (musicintent)
+                    while (true)
                     {
-                        case 0:
-                            break;
-                        case 1:
-                            musicout.Init(musicthemereader);
-                            musicintent = 0;
-                            musicout.Play();
-                            break;
-                        case 2:
-                            musicthemereader.Seek(0, 0);
-                            musicintent = 0;
-                            break;
-                        case 3:
-                            musicthemereader.Skip(100);
-                            musicintent = 0;
-                            break;
+                        if (musicthemereader.CurrentTime == themelen)
+                        {
+                            musicintent = 2;
+                        }
+                        switch (musicintent)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                musicout.Init(musicthemereader);
+                                musicintent = 0;
+                                musicout.Play();
+                                break;
+                            case 2:
+                                musicthemereader.Seek(0, 0);
+                                musicintent = 0;
+                                break;
+                            case 3:
+                                musicthemereader.Skip(100);
+                                musicintent = 0;
+                                break;
+                        }
                     }
+                }
+                catch(System.IO.DirectoryNotFoundException)
+                {
+                    Console.WriteLine("error the sounds folder was not found");
+                }
+                catch(System.IO.FileNotFoundException)
+                {
+                        Console.WriteLine("error the sound was not found");
                 }
             }
         }

@@ -12,6 +12,8 @@ namespace Sar_engine
             System.Threading.ThreadStart musicref = new System.Threading.ThreadStart(Engine.sound.Musicthread);
             System.Threading.Thread musicthread = new System.Threading.Thread(musicref);
             musicthread.Start();
+            string[] logo = { " ______   __  __     ______     ______    ", @"/\  == \ /\_\_\_\   /\  __ \   /\  ___\   ", @"\ \  _-/ \/_/\_\/_  \ \ \/\ \  \ \___  \  ", @" \ \_\     /\_\/\_\  \ \_____\  \/\_____\ ", @"  \/_/     \/_/\/_/   \/_____/   \/_____/   Version:8.6" };
+            Engine.screen.Drawmenu(logo);
         }
     }
 }
