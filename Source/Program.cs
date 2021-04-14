@@ -9,7 +9,9 @@ namespace Sar_engine
     {
         static void Main(string[] args)
         {
-        
+            System.Threading.ThreadStart musicref = new System.Threading.ThreadStart(Engine.sound.Musicthread);
+            System.Threading.Thread musicthread = new System.Threading.Thread(musicref);
+            musicthread.Start();
         }
     }
 }

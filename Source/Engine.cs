@@ -5,6 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using NAudio;
+using NAudio.Wave;
+using NAudio.CoreAudioApi;
+using NAudio.Codecs;
+using NAudio.FileFormats;
+using NAudio.Midi;
+using NAudio.Mixer;
+using NAudio.Lame;
 
 namespace Sar_engine
 {
@@ -14,6 +22,22 @@ namespace Sar_engine
         public static string state = "00000";
         public static int readspeed = 2000;
         public static string gamename = "Saris Unbounded";
+        public class Debug
+        {
+            public static bool IsDebug
+            {
+                get
+                {
+
+#if DEBUG
+                    return true;
+#else
+                return false;
+#endif
+
+                }
+            }
+        }
         public class Startup
         {
             static void Start()
@@ -118,7 +142,7 @@ namespace Sar_engine
                     string readspeedsave = readspeed.ToString();
                     string[] lines = { state, readspeedsave };
                     File.WriteAllLines(curFile, lines);
-                    //SUG.Program.savegame();
+                    //SUG.Program.savegame(); ignore this it is a legacy 1 thing 
                 }
                 catch (System.IO.IOException savee1)
                 {
@@ -165,7 +189,40 @@ namespace Sar_engine
         }
         public class sound
         {
-
+            public static int musicintent;
+            public static void Musicthread()
+            {
+                musicintent = 1;
+                var themelen = new System.TimeSpan(0, 0, 59);
+                var musicout = new WaveOutEvent();
+                var musicthemereader = new WaveFileReader("./sounds/theme.wav");
+                Console.WriteLine("music thread started");
+                while (true)
+                {
+                    if (musicthemereader.CurrentTime == themelen)
+                    {
+                        musicintent = 2;
+                    }
+                    switch (musicintent)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            musicout.Init(musicthemereader);
+                            musicintent = 0;
+                            musicout.Play();
+                            break;
+                        case 2:
+                            musicthemereader.Seek(0, 0);
+                            musicintent = 0;
+                            break;
+                        case 3:
+                            musicthemereader.Skip(100);
+                            musicintent = 0;
+                            break;
+                    }
+                }
+            }
         }
     }
 }
