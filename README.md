@@ -1,13 +1,11 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This Readme is to get you started with the SAR Engine
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
+* The SAR engine is the opensorce engine for saris unbounded that you can use to make your own text story game
+* VERY EARLY ALPHA
 ### How do I get set up? ###
 
 * Summary of set up
