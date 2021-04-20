@@ -90,6 +90,7 @@ namespace Sar_engine
                     {
                         Console.Write(item);
                         tickreader.Seek(0, 0);
+                        System.Threading.Thread.Sleep(300);
                     }
                     Console.WriteLine();
                     Engine.sound.musicintent = 2;
