@@ -17,4 +17,9 @@
                    dotnet build ./source/Engine.csproj -o /tmp/artifacts
        - store_artifacts:
           path: /tmp/artifacts
-        
+       - discord/status:
+          fail_only: false
+          failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
+          webhook: "${DISCORD_STATUS_WEBHOOK}"
+          success_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
+         
