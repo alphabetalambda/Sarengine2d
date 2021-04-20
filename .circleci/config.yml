@@ -2,6 +2,7 @@
 
  orbs:
   win: circleci/windows@2.2.0
+  discord: antonioned/discord@0.1.0
 
 
  jobs:
@@ -16,3 +17,4 @@
                    dotnet build ./source/Engine.csproj -o /tmp/artifacts
        - store_artifacts:
           path: /tmp/artifacts
+        
