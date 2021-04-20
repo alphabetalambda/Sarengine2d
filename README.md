@@ -4,7 +4,7 @@ This Readme is to get you started with the SAR Engine
 
 ### What is this repository for? ###
 
-* The SAR engine is the opensorce engine for saris unbounded that you can use to make your own text story game
+* The SAR engine is the open source engine for saris unbounded that you can use to make your own text story game
 * VERY EARLY ALPHA
 ### How do I get set up? ###
 
@@ -17,11 +17,11 @@ This Readme is to get you started with the SAR Engine
 
 ### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+* Keep it open source
+* Allow others to use your program freely
+* Test your program out first and make sure it isn't broken
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* If there are any problems found, please talk to an admin on our public discord server
+* If this was a build made by someone else, please contact the modder and not the admin
