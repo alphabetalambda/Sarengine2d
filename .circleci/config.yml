@@ -13,6 +13,6 @@
        - run:
                  command: |
                    mkdir /tmp/artifacts 
-                   dotnet build game2.csproj -o /tmp/artifacts
+                   dotnet build ./source/Engine.csproj -o /tmp/artifacts
        - store_artifacts:
           path: /tmp/artifacts
