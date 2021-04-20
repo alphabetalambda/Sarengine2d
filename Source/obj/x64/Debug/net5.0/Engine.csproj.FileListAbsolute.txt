@@ -22,3 +22,4 @@ C:\Users\lanen\source\repos\sa\Source\obj\x64\Debug\net5.0\Engine.dll
 C:\Users\lanen\source\repos\sa\Source\obj\x64\Debug\net5.0\ref\Engine.dll
 C:\Users\lanen\source\repos\sa\Source\obj\x64\Debug\net5.0\Engine.pdb
 C:\Users\lanen\source\repos\sa\Source\obj\x64\Debug\net5.0\Engine.genruntimeconfig.cache
+C:\Users\lanen\source\repos\sa\Source\obj\x64\Debug\net5.0\Engine.csprojAssemblyReference.cache

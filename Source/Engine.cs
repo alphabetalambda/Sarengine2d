@@ -88,9 +88,11 @@ namespace Sar_engine
                     tick.Play();
                     foreach (var item in title)
                     {
-                        Console.WriteLine(item);
+                        Console.Write(item);
                         tickreader.Seek(0, 0);
                     }
+                    Console.WriteLine();
+                    Engine.sound.musicintent = 2;
 
                 }
                 catch (System.IO.DirectoryNotFoundException)
