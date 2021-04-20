@@ -162,7 +162,7 @@ namespace Sar_engine
                 return output;
             }
         }
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
+#pragma warning restore IDE0059 // Unnecessary assignment of a value due to the nature of this being a engine
         public class Savesystem
         {
             static void Save()
