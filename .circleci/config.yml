@@ -1,0 +1,18 @@
+ version: 2.1
+
+ orbs:
+  win: circleci/windows@2.2.0
+
+
+ jobs:
+   build:
+     executor: win/default     
+    
+     steps:
+       - checkout
+       - run:
+                 command: |
+                   mkdir /tmp/artifacts 
+                   dotnet build game2.csproj -o /tmp/artifacts
+       - store_artifacts:
+          path: /tmp/artifacts
