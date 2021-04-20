@@ -258,13 +258,13 @@ namespace Sar_engine
                         }
                     }
                 }
-                catch(System.IO.DirectoryNotFoundException)
+                catch(System.IO.DirectoryNotFoundException) 
                 {
                     Console.WriteLine("error the sounds folder was not found");
                 }
                 catch(System.IO.FileNotFoundException)
                 {
-                        Console.WriteLine("error the sound was not found");
+                    Console.WriteLine("error the sound was not found");
                 }
             }
         }
