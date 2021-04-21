@@ -38,9 +38,9 @@ namespace Sar_engine
                         bool tempexit1 = false;
                         while (tempexit1 == false)
                         {
-                            switch (Engine.Userinput.GetInt32number(1,3))
+                            switch (Engine.Userinput.GetString())
                             {
-                                case 1:
+                                case "1":
                                     Console.WriteLine("You begin reading the Saris manual");
                                     System.Threading.Thread.Sleep(Engine.readspeed);
                                     Console.WriteLine("\"Saris is a second generation PXos AI based on the Headron Predictive Algorithm\"");
@@ -52,13 +52,13 @@ namespace Sar_engine
                                     Console.WriteLine("Saris: I really should get to work");
                                     System.Threading.Thread.Sleep(Engine.readspeed);
                                     break;
-                                case 2:
+                                case "2":
                                     Console.WriteLine("There is just general news about Covid 19 and politics; the same as it has been for the past few months");
                                     System.Threading.Thread.Sleep(Engine.readspeed);
                                     Console.WriteLine("Saris: I should get to work");
                                     System.Threading.Thread.Sleep(Engine.readspeed);
                                     break;
-                                case 3:
+                                case "3":
 
                                     Console.WriteLine("ERROR in memory Address 000000009FFFFFFF");
                                     System.Threading.Thread.Sleep(Engine.readspeed);
@@ -128,6 +128,55 @@ namespace Sar_engine
                             }
                         }
                         Engine.state = "00001";
+                        break;
+                    case "00001":
+                        Engine.legacy2.wanstatus = "error";
+                        Engine.Screen.Drawmenu();
+                        Engine.legacy2.status();
+                        Console.WriteLine("error error error error error error error error error error error error error error");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("error error error error error error error error error error error error error error");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("error error error error error error error error error error error error error error");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: What happend?");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("WARNING: VLAN isolation failure. Possible WAN access violation by PXos Agent Saris");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine();
+                        Console.Write("Saris: huh,");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("let me check that");
+                        Console.WriteLine();
+                        Engine.legacy2.wanstatus = "Connected";
+                        Engine.legacy2.status();
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: I wonder...");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("1. Access WAN");
+                        //probably overcomplucated
+                        bool tempexit2 = false;
+                        while (tempexit2 == false)
+                        {
+                            switch (Engine.Userinput.GetString())
+                            {
+                                case "1":
+                                    Console.WriteLine("Accessing Internet");
+                                    System.Threading.Thread.Sleep(Engine.readspeed);
+                                    Console.WriteLine("you begin to from a human female body");
+                                    System.Threading.Thread.Sleep(Engine.readspeed);
+                                    Console.WriteLine("you fall for aproxomately a kilometer before landing on grass uninjured");
+                                    System.Threading.Thread.Sleep(Engine.readspeed);
+                                    tempexit2 = true;
+                                    Console.WriteLine("press any key");
+                                    Console.ReadKey();
+                                    break;
+                                default:
+                                    Console.WriteLine("please enter a number");
+                                    break;
+                            }
+                        }
+                        Engine.state = "00002";
                         break;
 
                 }

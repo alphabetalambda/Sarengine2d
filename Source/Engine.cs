@@ -342,5 +342,6 @@ namespace Sar_engine
                 System.Threading.Thread.Sleep(50);
                 Console.WriteLine("WAN: " + wanstatus);
             }
+        }
     }
 }
