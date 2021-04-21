@@ -40,16 +40,33 @@ namespace Sar_engine
         }
         public class Startup
         {
-            static void Start()
+            static public void Start()
             {
                 Console.WriteLine("Powered By SAR Engine");
+                System.Threading.Thread.Sleep(3000);
+                Console.Write("loading");
+                System.Threading.ThreadStart musicref = new(Engine.Sound.Musicthread);
+                Console.Write(".");
+                System.Threading.Thread musicthread = new(musicref);
+                Console.Write(".");
+                musicthread.Start();
+                Console.WriteLine(" Done");
             }
         }
-        public class screen
+        public class Screen
         {
             //Drawing the diffrent sections of the menu
-            public static void Drawmenu(string[] topin)
+            public static void Drawmenu(string[] topin = null )
             {
+                int conhei = Console.WindowHeight + 1;
+                for (int i = 0; i < conhei; i++)
+                {
+                    Console.WriteLine();
+                }
+                if (topin == null)
+                {
+                    topin = Engineconfig.logo;
+                }
                 Drawmenutop(topin);
                 Drawmenumid();
                 Drawmenubot();
@@ -77,14 +94,14 @@ namespace Sar_engine
                 }
                 Console.WriteLine();
             }
-            public static void credits()
+            public static void Credits()
             {
-                Engine.sound.musicintent = 3;
+                Engine.Sound.musicintent = 3;
                 var tickreader = new WaveFileReader("./s/tick.wav");
                 var tick = new WaveOutEvent(); // or WaveOutEvent()
                 tick.Init(tickreader);
                 tick.Play();
-                char[][] creditarray = Sar_engine.engineconfig.creditsarray;
+                char[][] creditarray = Sar_engine.Engineconfig.creditsarray;
                 // Display the array elements:
                 for (int n = 0; n < creditarray.Length; n++)
                 {
@@ -99,13 +116,15 @@ namespace Sar_engine
                     }
                     System.Console.WriteLine();
                 }
-                Engine.sound.musicintent = 2;
+                Engine.Sound.musicintent = 2;
             }
-            public static void titlecard(char[] title)
+            //the title card works by printing each character in a char array
+            public static void Titlecard()
             {
                 try
                 {
-                    Engine.sound.musicintent = 3;
+                    char[] title = Sar_engine.Engineconfig.title;
+                    Engine.Sound.musicintent = 3;
                     var tickreader = new WaveFileReader("./s/tick.wav");
                     var tick = new WaveOutEvent(); // or WaveOutEvent()
                     tick.Init(tickreader);
@@ -117,7 +136,7 @@ namespace Sar_engine
                         System.Threading.Thread.Sleep(300);
                     }
                     Console.WriteLine();
-                    Engine.sound.musicintent = 2;
+                    Engine.Sound.musicintent = 2;
 
                 }
                 catch (System.IO.DirectoryNotFoundException)
@@ -129,7 +148,7 @@ namespace Sar_engine
                     Console.WriteLine("error the sound was not found");
                 }
             }
-            public static void writetext(string text)
+            public static void Writetext(string text)
             {
                 Console.WriteLine(text);
                 System.Threading.Thread.Sleep(readspeed);
@@ -216,7 +235,7 @@ namespace Sar_engine
                 {
                     case true:
                         string[] lines2 = File.ReadAllLines(curFile);
-                        System.IO.StreamReader readingFile = new System.IO.StreamReader(curFile);
+                        StreamReader readingFile = new StreamReader(curFile);
                         state = readingFile.ReadLine();
                         string readspeedstring = readingFile.ReadLine();
                         try
@@ -244,7 +263,7 @@ namespace Sar_engine
                 }
             }
         }
-        public class sound
+        public class Sound
         {
             public static int musicintent;
             public static void Musicthread()
