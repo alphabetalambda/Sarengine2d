@@ -97,10 +97,15 @@ namespace Sar_engine
             public static void Credits()
             {
                 Engine.Sound.musicintent = 3;
+                var outroreader = new WaveFileReader("./s/a-first-goodbye.wav");
                 var tickreader = new WaveFileReader("./s/tick.wav");
                 var tick = new WaveOutEvent(); // or WaveOutEvent()
+                var outro = new WaveOutEvent();
+                outro.Init(outroreader);
+                tick.Volume = 0.75f;
                 tick.Init(tickreader);
                 tick.Play();
+                outro.Play();
                 char[][] creditarray = Sar_engine.Engineconfig.creditsarray;
                 // Display the array elements:
                 for (int n = 0; n < creditarray.Length; n++)
