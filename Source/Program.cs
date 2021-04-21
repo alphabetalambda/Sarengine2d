@@ -9,12 +9,6 @@ namespace Sar_engine
     {
         static void Main(string[] args)
         {
-            Engine.Startup.Start();
-            Engine.Sound.musicintent = 1;
-            Engine.Screen.Drawmenu();
-            Engine.Screen.Titlecard();
-            Engine.Screen.Credits();
-
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Sar_engine
 {
     class Engine
     {
+        public static bool exitgame = false;
         public static string curFile = @"./save.sav";
         public static string state = "00000";
         public static int readspeed = 2000;
@@ -216,7 +217,7 @@ namespace Sar_engine
 #pragma warning restore IDE0059 // Unnecessary assignment of a value due to the nature of this being a engine
         public class Savesystem
         {
-            static void Save()
+            public static void Save()
             {
                 try
                 {
@@ -319,5 +320,27 @@ namespace Sar_engine
                 }
             }
         }
+        public class legacy2
+        {
+            public static string constatus;
+            public static string cpustatus;
+            public static string gpustatus;
+            public static string wanstatus;
+            public static string storestatus;
+            public static string lanstatus;
+            public static void status()
+            {
+                Console.WriteLine("PXos Cluster Control Server: " + constatus);
+                System.Threading.Thread.Sleep(50);
+                Console.WriteLine("CPU servers: " + cpustatus);
+                System.Threading.Thread.Sleep(50);
+                Console.WriteLine("GPU servers: " + gpustatus);
+                System.Threading.Thread.Sleep(50);
+                Console.WriteLine("Storage servers: " + storestatus);
+                System.Threading.Thread.Sleep(50);
+                Console.WriteLine("LAN: " + lanstatus);
+                System.Threading.Thread.Sleep(50);
+                Console.WriteLine("WAN: " + wanstatus);
+            }
     }
 }
