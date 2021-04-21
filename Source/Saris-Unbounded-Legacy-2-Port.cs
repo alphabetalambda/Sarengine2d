@@ -224,6 +224,48 @@ namespace Sar_engine
                         Engine.Userinput.GetString();
                         Engine.state = "00003";
                         break;
+                    case "00003":
+                        //clear the screen
+                        int repeat =  0;
+                        while (repeat < 101)
+                        {
+                            Console.WriteLine("");
+                            repeat++;
+                        }
+                        //int the sound player
+                        Engine.Sound.musicintent = 3;
+                        Engine.Screen.Titlecard();
+                        break;
+                    case "00004":
+                        Engine.Screen.Drawmenu();
+                        Console.WriteLine("Saris: What do you mean a human?! Humans cant get in here right?");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: Wellllllllllll... Kind of. Not directly at least but we should still be able to get in contact with one");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: Why dont we ask whoever made PXos?");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: She hasent been around in a very very very long time");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: But we can create a public challange for people to see if they can break into a very secure system");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: That sounds like playing with fire");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: It is! You'd think by now I would have learned not to play with fire if I dont want to get burned but here we are");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: lovely... and if we do get burned?");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: we wont");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: oh god");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: you dont happen to have a manuel do you?");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: yesss... why do you ask");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        break;
+                    default:
+                        Console.WriteLine("invalid state");
+                        break;
 
                 }
             }
