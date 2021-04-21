@@ -13,7 +13,7 @@ namespace Sar_engine
         {
             return (char)rnd.Next('a', 'z');
         }
-        static void SUL2P()
+        public static void SUL2P()
         {
             while (Engine.exitgame == false)
             {

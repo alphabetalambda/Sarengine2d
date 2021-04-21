@@ -209,7 +209,7 @@ namespace Sar_engine
             }
             public static string GetString()
             {
-                Console.WriteLine("input");
+                Console.WriteLine("input:");
                 string output = Console.ReadLine();
                 return output;
             }

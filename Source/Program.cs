@@ -9,6 +9,7 @@ namespace Sar_engine
     {
         static void Main(string[] args)
         {
+            Engine.Startup.Start();
         }
     }
 }

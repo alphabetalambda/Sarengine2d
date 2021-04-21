@@ -1,0 +1,8 @@
+C:\Users\lanen\source\repos\sa\Source\bin\Release\net5.0\publish\Engine.pdb
+C:\Users\lanen\source\repos\sa\Source\bin\Release\net5.0\publish\libmp3lame.32.dll
+C:\Users\lanen\source\repos\sa\Source\bin\Release\net5.0\publish\libmp3lame.64.dll
+C:\Users\lanen\source\repos\sa\Source\bin\Release\net5.0\publish\clrcompression.dll
+C:\Users\lanen\source\repos\sa\Source\bin\Release\net5.0\publish\clrjit.dll
+C:\Users\lanen\source\repos\sa\Source\bin\Release\net5.0\publish\coreclr.dll
+C:\Users\lanen\source\repos\sa\Source\bin\Release\net5.0\publish\mscordaccore.dll
+C:\Users\lanen\source\repos\sa\Source\bin\Release\net5.0\publish\Engine.exe
