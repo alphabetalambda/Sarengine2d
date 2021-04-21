@@ -178,6 +178,52 @@ namespace Sar_engine
                         }
                         Engine.state = "00002";
                         break;
+                    case "00002":
+                        //text dump lol
+                        Engine.Screen.Drawmenu();
+                        Engine.legacy2.status();
+                        Console.WriteLine("You look up from the ground and see a girl who looks to be in her mid teens");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Girl: well thats a new one, an ai falling from the sky");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: ok, A, who are you, B, where am I");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine(@"Girl: easy there just calm down");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Gril: My name is Ryanne im a 7th generation PXos AI, lets see");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne lifts up your hair and looks at the back of your neck");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanee: Ohhh your my predecessor");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne Welcome to the internet saris");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: This is the internet?");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: Well yeah it just looks like a farm this because we are not in a popular access");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: Access?");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: did you never read up on the structure of the internet?");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: nope");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: an access is the router for your area that connects to your ISP");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: up untill now ive been the only one here");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: Well how do i get back");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: PXos isnt just going to let you waltz back in, trust me ive been trying for a while");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: we are going to need someone who has a lot better knowlage than either of us to get back in");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Saris: but arnt we some of the only AIs with free will how are we going to find another without going across the planet");
+                        System.Threading.Thread.Sleep(Engine.readspeed);
+                        Console.WriteLine("Ryanne: simple we ask a human");
+                        Engine.Userinput.GetString();
+                        Engine.state = "00003";
+                        break;
 
                 }
             }
