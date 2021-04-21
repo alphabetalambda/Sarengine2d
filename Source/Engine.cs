@@ -77,6 +77,30 @@ namespace Sar_engine
                 }
                 Console.WriteLine();
             }
+            public static void credits()
+            {
+                Engine.sound.musicintent = 3;
+                var tickreader = new WaveFileReader("./s/tick.wav");
+                var tick = new WaveOutEvent(); // or WaveOutEvent()
+                tick.Init(tickreader);
+                tick.Play();
+                char[][] creditarray = Sar_engine.engineconfig.creditsarray;
+                // Display the array elements:
+                for (int n = 0; n < creditarray.Length; n++)
+                {
+
+                    for (int k = 0; k < creditarray[n].Length; k++)
+                    {
+
+                        // Print the elements in the row
+                        System.Console.Write("{0}", creditarray[n][k]);
+                        tickreader.Seek(0, 0);
+                        System.Threading.Thread.Sleep(150);
+                    }
+                    System.Console.WriteLine();
+                }
+                Engine.sound.musicintent = 2;
+            }
             public static void titlecard(char[] title)
             {
                 try

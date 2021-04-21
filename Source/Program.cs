@@ -16,6 +16,8 @@ namespace Sar_engine
             Engine.screen.Drawmenu(logo);
             char[] title = { 'l', 'o', 'l' };
             Engine.screen.titlecard(title);
+            Engine.screen.credits();
+
         }
     }
 }
