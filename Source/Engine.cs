@@ -25,6 +25,9 @@ namespace Sar_engine
         public static string gamename = "Saris Unbounded";
         public class Debug
         {
+            static string PROCESSORIDENTIFIER = Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER");
+            static string OS = System.Environment.GetEnvironmentVariable("OS");
+            static string PROCESSORARCHITECTURE = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE");
             public static bool IsDebug
             {
                 get
@@ -38,12 +41,21 @@ namespace Sar_engine
 
                 }
             }
+            public static void debugmenu()
+            {
+                Console.Write("PROCESSOR_IDENTIFIER: ");
+                Console.WriteLine(PROCESSORIDENTIFIER);
+                Console.Write("OS: ");
+                Console.WriteLine(OS);
+                Console.Write("PROCESSOR_ARCHITECTURE: ");
+                Console.WriteLine(PROCESSORARCHITECTURE);
+            }
         }
         public class Startup
         {
             static public void Start()
             {
-                string[] enginename = { @"  ___   _   ___   ___           _          ", @" / __| /_\ | _ \ | __|_ _  __ _(_)_ _  ___ ", @" \__ \/ _ \|   / | _|| ' \/ _` | | ' \/ -_)", @" |___/_/ \_\_|_\ |___|_||_\__, |_|_||_\___|", @"                          |___/            "};
+                string[] enginename = { @"  ___   _   ___   ___           _          ", @" / __| /_\ | _ \ | __|_ _  __ _(_)_ _  ___ ", @" \__ \/ _ \|   / | _|| ' \/ _` | | ' \/ -_)", @" |___/_/ \_\_|_\ |___|_||_\__, |_|_||_\___|", @"                          |___/            " };
                 Console.WriteLine("Powered By");
                 System.Threading.Thread.Sleep(500);
                 foreach (var item in enginename)
@@ -75,6 +87,9 @@ namespace Sar_engine
                 {
                     topin = Engineconfig.logo;
                 }
+#if DEBUG
+                Engine.Debug.debugmenu();
+#endif
                 Drawmenutop(topin);
                 Drawmenumid();
                 Drawmenubot();
