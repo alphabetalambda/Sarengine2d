@@ -43,7 +43,14 @@ namespace Sar_engine
         {
             static public void Start()
             {
-                Console.WriteLine("Powered By SAR Engine");
+                string[] enginename = { @"  ___   _   ___   ___           _          ", @" / __| /_\ | _ \ | __|_ _  __ _(_)_ _  ___ ", @" \__ \/ _ \|   / | _|| ' \/ _` | | ' \/ -_)", @" |___/_/ \_\_|_\ |___|_||_\__, |_|_||_\___|", @"                          |___/            "};
+                Console.WriteLine("Powered By");
+                System.Threading.Thread.Sleep(500);
+                foreach (var item in enginename)
+                {
+                    Console.WriteLine(item);
+                    System.Threading.Thread.Sleep(5);
+                }
                 System.Threading.Thread.Sleep(3000);
                 Console.Write("loading");
                 System.Threading.ThreadStart musicref = new(Engine.Sound.Musicthread);
