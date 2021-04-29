@@ -108,6 +108,15 @@
           "lib/netstandard2.0/NAudio.WinMM.dll": {}
         }
       },
+      "NvAPIWrapper.Net/0.8.1.101": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NvAPIWrapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NvAPIWrapper.dll": {}
+        }
+      },
       "System.Security.AccessControl/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -297,6 +306,23 @@
         "naudio.winmm.nuspec"
       ]
     },
+    "NvAPIWrapper.Net/0.8.1.101": {
+      "sha512": "qX+5EQ32tCTqBkX/9BNfx7w4HPi18s3XhMubjbxSjPhYQ6pXWL+HGnaZEmGvFlOxvsQN+/6eV3x5bRo1CDY/mQ==",
+      "type": "package",
+      "path": "nvapiwrapper.net/0.8.1.101",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net45/NvAPIWrapper.dll",
+        "lib/net45/NvAPIWrapper.xml",
+        "lib/netstandard2.0/NvAPIWrapper.dll",
+        "lib/netstandard2.0/NvAPIWrapper.xml",
+        "nvapiwrapper.net.0.8.1.101.nupkg.sha512",
+        "nvapiwrapper.net.nuspec",
+        "readme.txt"
+      ]
+    },
     "System.Security.AccessControl/4.7.0": {
       "sha512": "JECvTt5aFF3WT3gHpfofL2MNNP6v84sxtXxpqhLBCcDRzqsPBmHhQ6shv4DwwN2tRlzsUxtb3G9M3763rbXKDg==",
       "type": "package",
@@ -405,7 +431,8 @@
       "NAudio.Lame >= 2.0.0",
       "NAudio.Midi >= 2.0.0",
       "NAudio.Wasapi >= 2.0.0",
-      "NAudio.WinMM >= 2.0.0"
+      "NAudio.WinMM >= 2.0.0",
+      "NvAPIWrapper.Net >= 0.8.1.101"
     ]
   },
   "packageFolders": {
@@ -437,7 +464,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://packages.stride3d.net/nuget": {}
       },
       "frameworks": {
         "net5.0": {
@@ -478,6 +506,10 @@
           "NAudio.WinMM": {
             "target": "Package",
             "version": "[2.0.0, )"
+          },
+          "NvAPIWrapper.Net": {
+            "target": "Package",
+            "version": "[0.8.1.101, )"
           }
         },
         "imports": [

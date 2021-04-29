@@ -13,6 +13,9 @@ using NAudio.FileFormats;
 using NAudio.Midi;
 using NAudio.Mixer;
 using NAudio.Lame;
+using Discord;
+using System.Diagnostics;
+
 
 namespace Sar_engine
 {
@@ -20,6 +23,7 @@ namespace Sar_engine
     {
         public static bool exitgame = false;
         public static string curFile = @"./save.sav";
+        public static string logFile = @"./log.log";
         public static string state = "00000";
         public static int readspeed = 2000;
         public static string gamename = "Saris Unbounded";
@@ -50,11 +54,40 @@ namespace Sar_engine
                 Console.Write("PROCESSOR_ARCHITECTURE: ");
                 Console.WriteLine(PROCESSORARCHITECTURE);
             }
+            public void debugstartup()
+            {
+            }
+            public class log
+            {
+                public static StringBuilder sb;
+                public static void start()
+                {
+                    sb = new StringBuilder();
+                }
+                /// <summary>
+                /// the function to be used for a thread to write to the console 
+                /// </summary>
+                /// <param name="ToWrite">the text to log to the console</param>
+                public static void WriteAsThread(string ToWrite)
+                {
+                    string ParsedWrite;
+                    string ThreadName = System.Threading.Thread.CurrentThread.Name;
+                    ParsedWrite = $"[{ThreadName}] {ToWrite}";
+                    sb.AppendLine(ParsedWrite);
+                    File.AppendAllText(logFile, sb.ToString());
+                    sb.Clear();
+                }
+            }
         }
         public class Startup
         {
+            /// <summary>
+            /// the start function that needs to be ran to properly initalize the engine
+            /// </summary>
             static public void Start()
             {
+                System.Threading.Thread.CurrentThread.Name = "Main";
+                var debugfunctions = new Debug();
                 string[] enginename = { @"  ___   _   ___   ___           _          ", @" / __| /_\ | _ \ | __|_ _  __ _(_)_ _  ___ ", @" \__ \/ _ \|   / | _|| ' \/ _` | | ' \/ -_)", @" |___/_/ \_\_|_\ |___|_||_\__, |_|_||_\___|", @"                          |___/            " };
                 Console.WriteLine("Powered By");
                 System.Threading.Thread.Sleep(500);
@@ -65,17 +98,44 @@ namespace Sar_engine
                 }
                 System.Threading.Thread.Sleep(3000);
                 Console.Write("loading");
+                Debug.log.start();
+                Debug.log.WriteAsThread("Logging started");
                 System.Threading.ThreadStart musicref = new(Engine.Sound.Musicthread);
+                System.Threading.ThreadStart discordref = new(Engine.DiscordSDK.Discordthread);
                 Console.Write(".");
                 System.Threading.Thread musicthread = new(musicref);
+                System.Threading.Thread discordthread = new(discordref);
                 Console.Write(".");
                 musicthread.Start();
+                discordthread.Start();
                 Console.WriteLine(" Done");
             }
         }
         public class Screen
         {
-            //Drawing the diffrent sections of the menu
+            /// <summary>
+            /// write the text and delay by the read speed
+            /// </summary>
+            /// <param name="text">the text to write</param>
+            public static void Write(string text)
+            {
+                Console.WriteLine(text);
+                System.Threading.Thread.Sleep(readspeed);
+            }
+            /// <summary>
+            /// prints as many lines as the window is tall
+            /// </summary>
+            public static void Clearscreeen()
+            {
+                int conhei = Console.WindowHeight + 1;
+                for (int i = 0; i < conhei; i++)
+                {
+                    Console.WriteLine();
+                }
+            }
+            /// <summary>
+            /// Drawing the diffrent sections of the menu
+            /// </summary>
             public static void Drawmenu(string[] topin = null )
             {
                 int conhei = Console.WindowHeight + 1;
@@ -146,7 +206,9 @@ namespace Sar_engine
                 }
                 Engine.Sound.musicintent = 2;
             }
-            //the title card works by printing each character in a char array
+            /// <summary>
+            /// the title card works by printing each character in a char array
+            /// </summary>
             public static void Titlecard()
             {
                 try
@@ -235,6 +297,11 @@ namespace Sar_engine
                 string output = Console.ReadLine();
                 return output;
             }
+            public static void Waitforinput()
+            {
+                Console.Write("press enter to continue");
+                Console.ReadLine();
+            }
         }
 #pragma warning restore IDE0059 // Unnecessary assignment of a value due to the nature of this being a engine
         public class Savesystem
@@ -255,7 +322,7 @@ namespace Sar_engine
                     System.Console.WriteLine(savee1);
                 }
             }
-            static void Load()
+            static public void Load()
             {
                 bool exsistingsave = File.Exists(curFile);
                 //haha now andrew cant bully me for haveing no catch here
@@ -363,6 +430,75 @@ namespace Sar_engine
                 Console.WriteLine("LAN: " + lanstatus);
                 System.Threading.Thread.Sleep(50);
                 Console.WriteLine("WAN: " + wanstatus);
+            }
+        }
+        public class DiscordSDK
+        {
+            public static void SetStatusDetails(string Details)
+            {
+                DiscordStatTxt = Details;
+                statusupdated = true;
+            }
+            volatile static string DiscordStatTxt;
+            static bool statusupdated = true;
+            public static void Discordthread()
+            {
+                Debug.log.WriteAsThread("Thread started");
+                System.Threading.Thread.CurrentThread.Name = "Discord";
+                // Use your client ID from Discord's developer site.
+                string clientID = null;
+                if (clientID == null)
+                {
+                    clientID = "837008599951343706";
+                }
+                var discordapi = new Discord.Discord(Int64.Parse(clientID), (UInt64)Discord.CreateFlags.Default);
+                var activitymanager = discordapi.GetActivityManager();
+                if (DiscordStatTxt == null)
+                {
+                    DiscordStatTxt = "playing " + gamename;
+                }
+                var activity = new Discord.Activity
+                {
+                    Details = DiscordStatTxt,
+                    Assets =
+                        {
+                            LargeImage = "main-icon",
+                            LargeText = "Saris Unbounded",
+                       }
+                };
+                activitymanager.UpdateActivity(activity, (res) =>
+                {
+                    if (Engine.Debug.IsDebug == true)
+                    {
+
+                    }
+                });
+                while (1 == 1)
+                {
+                    if (statusupdated == true)
+                    {
+                        var activitynew = new Discord.Activity
+                        {
+                            Details = DiscordStatTxt,
+                            Assets =
+                        {
+                            LargeImage = "main-icon",
+                            LargeText = "Saris Unbounded",
+                       }
+                        };
+                        activitymanager.UpdateActivity(activitynew, (res) =>
+                        {
+                            if (Engine.Debug.IsDebug == true)
+                            {
+
+                            }
+                        });
+                        statusupdated = false;
+                    }
+                    discordapi.RunCallbacks();
+                    Debug.log.WriteAsThread("Updated status");
+                    System.Threading.Thread.Sleep(4000);
+                }
             }
         }
     }

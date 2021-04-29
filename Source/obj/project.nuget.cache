@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5vp3HkNwqgLIQZeKp/b3DX6Z+HJMF1T1lm1J8xhq7SMkzxM0HtcDZyXfrWQdK/1Df5fPMlKu/WRiApyE3sJVlw==",
+  "dgSpecHash": "02kzmrvjbwEtl576+pP8AEi2qiEeSsx6aGft3JPx/MUBVr5MYipaC0D6HH8W85o4O6GRdVbS3mCfUnQBC2Lxsw==",
   "success": true,
   "projectFilePath": "C:\\Users\\lanen\\source\\repos\\sa\\Source\\Engine.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\lanen\\.nuget\\packages\\naudio.midi\\2.0.0\\naudio.midi.2.0.0.nupkg.sha512",
     "C:\\Users\\lanen\\.nuget\\packages\\naudio.wasapi\\2.0.0\\naudio.wasapi.2.0.0.nupkg.sha512",
     "C:\\Users\\lanen\\.nuget\\packages\\naudio.winmm\\2.0.0\\naudio.winmm.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\nvapiwrapper.net\\0.8.1.101\\nvapiwrapper.net.0.8.1.101.nupkg.sha512",
     "C:\\Users\\lanen\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\lanen\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
   ],

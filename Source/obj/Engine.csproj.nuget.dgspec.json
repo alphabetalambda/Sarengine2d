@@ -28,7 +28,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://packages.stride3d.net/nuget": {}
         },
         "frameworks": {
           "net5.0": {
@@ -69,6 +70,10 @@
             "NAudio.WinMM": {
               "target": "Package",
               "version": "[2.0.0, )"
+            },
+            "NvAPIWrapper.Net": {
+              "target": "Package",
+              "version": "[0.8.1.101, )"
             }
           },
           "imports": [
