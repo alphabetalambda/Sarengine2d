@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+#if NOSDKSLINUX
+#else
 using NAudio;
 using NAudio.Wave;
 using NAudio.CoreAudioApi;
@@ -13,6 +15,7 @@ using NAudio.FileFormats;
 using NAudio.Midi;
 using NAudio.Mixer;
 using NAudio.Lame;
+#endif
 using Discord;
 using System.Diagnostics;
 
@@ -110,7 +113,11 @@ namespace Sar_engine
 #if NOSDKS
                 Debug.log.WriteAsThread("not starting discord thread as current version is NoSDKs");
 #else
+#if NOSDKSLINUX
+                Debug.log.WriteAsThread("not starting discord thread as current version is NoSDKs");
+#else
                 discordthread.Start();
+#endif
 #endif
                 Console.WriteLine(" Done");
             }
@@ -184,6 +191,8 @@ namespace Sar_engine
             public static void Credits()
             {
                 Engine.Sound.musicintent = 3;
+#if NOSDKSLINUX
+#else
                 var outroreader = new WaveFileReader("./s/a-first-goodbye.wav");
                 var tickreader = new WaveFileReader("./s/tick.wav");
                 var tick = new WaveOutEvent(); // or WaveOutEvent()
@@ -193,6 +202,7 @@ namespace Sar_engine
                 tick.Init(tickreader);
                 tick.Play();
                 outro.Play();
+#endif
                 char[][] creditarray = Sar_engine.Engineconfig.creditsarray;
                 // Display the array elements:
                 for (int n = 0; n < creditarray.Length; n++)
@@ -203,7 +213,10 @@ namespace Sar_engine
 
                         // Print the elements in the row
                         System.Console.Write("{0}", creditarray[n][k]);
+#if NOSDKSLINUX
+#else
                         tickreader.Seek(0, 0);
+#endif
                         System.Threading.Thread.Sleep(150);
                     }
                     System.Console.WriteLine();
@@ -219,14 +232,20 @@ namespace Sar_engine
                 {
                     char[] title = Sar_engine.Engineconfig.title;
                     Engine.Sound.musicintent = 3;
+#if NOSDKSLINUX
+#else
                     var tickreader = new WaveFileReader("./s/tick.wav");
                     var tick = new WaveOutEvent(); // or WaveOutEvent()
                     tick.Init(tickreader);
                     tick.Play();
+#endif
                     foreach (var item in title)
                     {
                         Console.Write(item);
+#if NOSDKSLINUX
+#else
                         tickreader.Seek(0, 0);
+#endif
                         System.Threading.Thread.Sleep(300);
                     }
                     Console.WriteLine();
@@ -367,6 +386,8 @@ namespace Sar_engine
             public static int musicintent;
             public static void Musicthread()
             {
+#if NOSDKSLINUX
+#else
                 musicintent = 1;
                 var themelen = new System.TimeSpan(0, 0, 59);
                 var musicout = new WaveOutEvent();
@@ -411,6 +432,7 @@ namespace Sar_engine
                 {
                     Console.WriteLine("error the sound was not found");
                 }
+#endif
             }
         }
         public class legacy2
