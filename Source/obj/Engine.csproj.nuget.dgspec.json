@@ -47,6 +47,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "JackSharp": {
+              "target": "Package",
+              "version": "[0.4.0, )"
+            },
+            "LibVLCSharp": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
             "NAudio.Asio": {
               "target": "Package",
               "version": "[2.0.0, )"
@@ -74,6 +82,10 @@
             "NvAPIWrapper.Net": {
               "target": "Package",
               "version": "[0.8.1.101, )"
+            },
+            "VideoLAN.LibVLC.Mac": {
+              "target": "Package",
+              "version": "[3.1.3.1, )"
             }
           },
           "imports": [

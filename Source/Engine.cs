@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Media;
 #if NOSDKSLINUX
+using LibVLCSharp;
 #else
 using NAudio;
 using NAudio.Wave;
@@ -24,6 +26,7 @@ namespace Sar_engine
 {
     class Engine
     {
+        public static string musicdir = @"./s/";
         public static bool exitgame = false;
         public static string curFile = @"./save.sav";
         public static string logFile = @"./log.log";
@@ -48,7 +51,7 @@ namespace Sar_engine
 
                 }
             }
-            public static void debugmenu()
+            public static void Debugmenu()
             {
                 Console.Write("PROCESSOR_IDENTIFIER: ");
                 Console.WriteLine(PROCESSORIDENTIFIER);
@@ -57,13 +60,13 @@ namespace Sar_engine
                 Console.Write("PROCESSOR_ARCHITECTURE: ");
                 Console.WriteLine(PROCESSORARCHITECTURE);
             }
-            public void debugstartup()
+            public static void Debugstartup()
             {
             }
-            public class log
+            public class Log
             {
                 public static StringBuilder sb;
-                public static void start()
+                public static void Start()
                 {
                     sb = new StringBuilder();
                 }
@@ -101,8 +104,8 @@ namespace Sar_engine
                 }
                 System.Threading.Thread.Sleep(3000);
                 Console.Write("loading");
-                Debug.log.start();
-                Debug.log.WriteAsThread("Logging started");
+                Debug.Log.Start();
+                Debug.Log.WriteAsThread("Logging started");
                 System.Threading.ThreadStart musicref = new(Engine.Sound.Musicthread);
                 System.Threading.ThreadStart discordref = new(Engine.DiscordSDK.Discordthread);
                 Console.Write(".");
@@ -114,7 +117,7 @@ namespace Sar_engine
                 Debug.log.WriteAsThread("not starting discord thread as current version is NoSDKs");
 #else
 #if NOSDKSLINUX
-                Debug.log.WriteAsThread("not starting discord thread as current version is NoSDKs");
+                Debug.Log.WriteAsThread("not starting discord thread as current version is NoSDKs");
 #else
                 discordthread.Start();
 #endif
@@ -159,7 +162,7 @@ namespace Sar_engine
                     topin = Engineconfig.logo;
                 }
 #if DEBUG
-                Engine.Debug.debugmenu();
+                Engine.Debug.Debugmenu();
 #endif
                 Drawmenutop(topin);
                 Drawmenumid();
@@ -192,6 +195,7 @@ namespace Sar_engine
             {
                 Engine.Sound.musicintent = 3;
 #if NOSDKSLINUX
+
 #else
                 var outroreader = new WaveFileReader("./s/a-first-goodbye.wav");
                 var tickreader = new WaveFileReader("./s/tick.wav");
@@ -383,10 +387,14 @@ namespace Sar_engine
         }
         public class Sound
         {
+#if NOSDKSLINUX
+#endif
             public static int musicintent;
             public static void Musicthread()
             {
 #if NOSDKSLINUX
+
+
 #else
                 musicintent = 1;
                 var themelen = new System.TimeSpan(0, 0, 59);
@@ -433,8 +441,8 @@ namespace Sar_engine
                     Console.WriteLine("error the sound was not found");
                 }
 #endif
-            }
         }
+    }
         public class legacy2
         {
             public static string constatus;
@@ -469,7 +477,7 @@ namespace Sar_engine
             static bool statusupdated = true;
             public static void Discordthread()
             {
-                Debug.log.WriteAsThread("Thread started");
+                Debug.Log.WriteAsThread("Thread started");
                 System.Threading.Thread.CurrentThread.Name = "Discord";
                 // Use your client ID from Discord's developer site.
                 string clientID = null;
@@ -522,12 +530,12 @@ namespace Sar_engine
                         statusupdated = false;
                     }
                     discordapi.RunCallbacks();
-                    Debug.log.WriteAsThread("Updated status");
+                    Debug.Log.WriteAsThread("Updated status");
                     System.Threading.Thread.Sleep(4000);
                 }
             }
         }
-        public class gameclasses
+        public class Gameclasses
         {
             public class ItemsInv
             {
