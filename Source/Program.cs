@@ -16,6 +16,7 @@ namespace Sar_engine
             while (Engine.exitgame == false)
             {
                 Engine.DiscordSDK.SetStatusDetails($"Current State: {Engine.state}");
+                Engine.Savesystem.Save();
                 switch (Engine.state)
                 {
                     case "00000":

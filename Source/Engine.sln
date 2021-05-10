@@ -9,6 +9,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
+		NoSDKs|Any CPU = NoSDKs|Any CPU
+		NoSDKs|x64 = NoSDKs|x64
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
@@ -17,6 +19,10 @@ Global
 		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.Debug|x64.ActiveCfg = Debug|x64
 		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.Debug|x64.Build.0 = Debug|x64
+		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.NoSDKs|Any CPU.ActiveCfg = NoSDKs|Any CPU
+		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.NoSDKs|Any CPU.Build.0 = NoSDKs|Any CPU
+		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.NoSDKs|x64.ActiveCfg = NoSDKs|x64
+		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.NoSDKs|x64.Build.0 = NoSDKs|x64
 		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFD55CE6-EF69-4137-97ED-4D974FDD8EF9}.Release|x64.ActiveCfg = Release|x64

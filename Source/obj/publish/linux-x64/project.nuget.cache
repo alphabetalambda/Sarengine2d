@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "GHZPXFIp8rs1isxfvOClQU03cLS/B2KmfvbFQstEsledhX0OgUeTY7CQvhFJV/cjxKf7X26QQOLmf202xfnIFA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lanen\\source\\repos\\sa\\Source\\Engine.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lanen\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.asio\\2.0.0\\naudio.asio.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.core\\2.0.0\\naudio.core.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.lame\\2.0.0\\naudio.lame.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.midi\\2.0.0\\naudio.midi.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.wasapi\\2.0.0\\naudio.wasapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\naudio.winmm\\2.0.0\\naudio.winmm.2.0.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\nvapiwrapper.net\\0.8.1.101\\nvapiwrapper.net.0.8.1.101.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\5.0.4\\microsoft.netcore.app.runtime.linux-x64.5.0.4.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\5.0.4\\microsoft.aspnetcore.app.runtime.linux-x64.5.0.4.nupkg.sha512",
+    "C:\\Users\\lanen\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\5.0.4\\microsoft.netcore.app.host.linux-x64.5.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

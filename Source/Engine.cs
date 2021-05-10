@@ -107,7 +107,11 @@ namespace Sar_engine
                 System.Threading.Thread discordthread = new(discordref);
                 Console.Write(".");
                 musicthread.Start();
+#if NOSDKS
+                Debug.log.WriteAsThread("not starting discord thread as current version is NoSDKs");
+#else
                 discordthread.Start();
+#endif
                 Console.WriteLine(" Done");
             }
         }
@@ -498,6 +502,100 @@ namespace Sar_engine
                     discordapi.RunCallbacks();
                     Debug.log.WriteAsThread("Updated status");
                     System.Threading.Thread.Sleep(4000);
+                }
+            }
+        }
+        public class gameclasses
+        {
+            public class ItemsInv
+            {
+                public class InventorySystem
+                {
+                    private const int MAXIMUM_SLOTS_IN_INVENTORY = 10;
+
+                    public readonly List<InventoryRecord> InventoryRecords = new List<InventoryRecord>();
+
+                    public void AddItem(ObtainableItem item, int quantityToAdd)
+                    {
+                        while (quantityToAdd > 0)
+                        {
+                            if (InventoryRecords.Exists(x => (x.InventoryItem.ID == item.ID) && (x.Quantity < item.MaximumStackableQuantity)))
+                            {
+                                InventoryRecord inventoryRecord =
+                                InventoryRecords.First(x => (x.InventoryItem.ID == item.ID) && (x.Quantity < item.MaximumStackableQuantity));
+                                int maximumQuantityYouCanAddToThisStack = (item.MaximumStackableQuantity - inventoryRecord.Quantity);
+                                int quantityToAddToStack = Math.Min(quantityToAdd, maximumQuantityYouCanAddToThisStack);
+                                inventoryRecord.AddToQuantity(quantityToAddToStack);
+                                quantityToAdd -= quantityToAddToStack;
+                            }
+                            else
+                            {
+                                if (InventoryRecords.Count < MAXIMUM_SLOTS_IN_INVENTORY)
+                                {
+                                    InventoryRecords.Add(new InventoryRecord(item, 0));
+                                }
+                                else
+                                {
+                                    throw new Exception("There is no more space in the inventory");
+                                }
+                            }
+                        }
+                    }
+                    public class InventoryRecord
+                    {
+                        public ObtainableItem InventoryItem { get; private set; }
+                        public int Quantity { get; private set; }
+
+                        public InventoryRecord(ObtainableItem item, int quantity)
+                        {
+                            InventoryItem = item;
+                            Quantity = quantity;
+                        }
+
+                        public void AddToQuantity(int amountToAdd)
+                        {
+                            Quantity += amountToAdd;
+                        }
+                    }
+                }
+
+                public abstract class ObtainableItem
+                {
+                    public Guid ID { get; set; }
+                    public string Name { get; set; }
+                    public int MaximumStackableQuantity { get; set; }
+
+                    protected ObtainableItem()
+                    {
+                        MaximumStackableQuantity = 1;
+                    }
+                }
+            }
+            public class ClassesForCharacters
+            {
+                /// <summary>
+                /// do not use for a character
+                /// </summary>
+                public class OriginClassForCharacters
+                {
+                    public string Name;
+                    public int MaxHP;
+                    public int HP;
+                }
+                public class MainCharacter : OriginClassForCharacters
+                {
+                    public string CharacterClass;
+                }
+                /// <summary>
+                ///  do not use for a character
+                ///  use to extend your own class 
+                /// </summary>
+                public class NPC : OriginClassForCharacters
+                {
+                    /// <summary>
+                    /// how much currancy to give on kill
+                    /// </summary>
+                    public int value;
                 }
             }
         }
