@@ -24,10 +24,4 @@
     <Folder Include="sounds\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="irrKlang.NET4">
-      <HintPath>..\..\..\..\Downloads\irrKlang-64bit-1.6.0\bin\dotnet-4-64\irrKlang.NET4.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
