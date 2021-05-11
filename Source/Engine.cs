@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 using System.Globalization;
 using System.Media;
 #if NOSDKSLINUX
-using LibVLCSharp;
+using NetCoreAudio;
 #else
-using NAudio;
 using NAudio.Wave;
 using NAudio.CoreAudioApi;
 using NAudio.Codecs;
@@ -18,6 +17,7 @@ using NAudio.Midi;
 using NAudio.Mixer;
 using NAudio.Lame;
 #endif
+using NAudio;
 using Discord;
 using System.Diagnostics;
 
@@ -393,7 +393,43 @@ namespace Sar_engine
             public static void Musicthread()
             {
 #if NOSDKSLINUX
-
+                var themelen = new System.TimeSpan(0, 0, 59);
+                var musicplayer = new NetCoreAudio.Player();
+                musicplayer.PlaybackFinished += OnPlaybackFinished;
+                try
+                {
+                    if (Debug.IsDebug == true)
+                    {
+                        Console.WriteLine("music thread started");
+                    }
+                    while (true)
+                    {
+                        switch (musicintent)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                musicintent = 0;
+                                musicplayer.Play("./s/theme.wav");
+                                break;
+                            case 2:
+                                //unused artifact from windows
+                                break;
+                            case 3:
+                                musicplayer.Stop();
+                                musicintent = 0;
+                                break;
+                        }
+                    }
+                }
+                catch (System.IO.DirectoryNotFoundException)
+                {
+                    Console.WriteLine("error the sounds folder was not found");
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    Console.WriteLine("error the sound was not found");
+                }
 
 #else
                 musicintent = 1;
@@ -441,8 +477,12 @@ namespace Sar_engine
                     Console.WriteLine("error the sound was not found");
                 }
 #endif
+            }
+            private static void OnPlaybackFinished(object sender, EventArgs e)
+            {
+                musicintent = 1;
+            }
         }
-    }
         public class legacy2
         {
             public static string constatus;
