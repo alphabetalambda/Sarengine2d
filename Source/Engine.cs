@@ -396,6 +396,7 @@ namespace Sar_engine
                 var themelen = new System.TimeSpan(0, 0, 59);
                 var musicplayer = new NetCoreAudio.Player();
                 musicplayer.PlaybackFinished += OnPlaybackFinished;
+                musicintent = 1;
                 try
                 {
                     if (Debug.IsDebug == true)
