@@ -8,16 +8,27 @@
     ".NETCoreApp,Version=v5.0": {
       "Engine/1.0.0": {
         "dependencies": {
+          "LibVLCSharp": "3.5.0",
           "NAudio.Asio": "2.0.0",
           "NAudio.Core": "2.0.0",
           "NAudio.Lame": "2.0.0",
           "NAudio.Midi": "2.0.0",
           "NAudio.Wasapi": "2.0.0",
           "NAudio.WinMM": "2.0.0",
-          "NvAPIWrapper.Net": "0.8.1.101"
+          "NetCoreAudio": "1.6.3",
+          "NvAPIWrapper.Net": "0.8.1.101",
+          "VideoLAN.LibVLC.Mac": "3.1.3.1"
         },
         "runtime": {
           "Engine.dll": {}
+        }
+      },
+      "LibVLCSharp/3.5.0": {
+        "runtime": {
+          "lib/netstandard2.1/LibVLCSharp.dll": {
+            "assemblyVersion": "3.5.0.0",
+            "fileVersion": "3.5.0.0"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/3.1.0": {},
@@ -92,6 +103,14 @@
           }
         }
       },
+      "NetCoreAudio/1.6.3": {
+        "runtime": {
+          "lib/netstandard2.0/NetCoreAudio.dll": {
+            "assemblyVersion": "1.6.3.0",
+            "fileVersion": "1.6.3.0"
+          }
+        }
+      },
       "NvAPIWrapper.Net/0.8.1.101": {
         "runtime": {
           "lib/netstandard2.0/NvAPIWrapper.dll": {
@@ -106,7 +125,8 @@
           "System.Security.Principal.Windows": "4.7.0"
         }
       },
-      "System.Security.Principal.Windows/4.7.0": {}
+      "System.Security.Principal.Windows/4.7.0": {},
+      "VideoLAN.LibVLC.Mac/3.1.3.1": {}
     }
   },
   "libraries": {
@@ -114,6 +134,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "LibVLCSharp/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-g1aRroRP8VszhzA9Zy/ZOEr4QFHdQNKGIXEuBZuahg2N4vDEvL4j9XLh+BmHJ7w9BI3WvalCMFrgo4heP2GwAA==",
+      "path": "libvlcsharp/3.5.0",
+      "hashPath": "libvlcsharp.3.5.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/3.1.0": {
       "type": "package",
@@ -171,6 +198,13 @@
       "path": "naudio.winmm/2.0.0",
       "hashPath": "naudio.winmm.2.0.0.nupkg.sha512"
     },
+    "NetCoreAudio/1.6.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7Awjc/Z9t4dAM3UDWaSxM0SMJera+htKjtDeI0y8Bc07f9HvlOEc8GrUVjUqt3LfSIlm4pcFdYZ3nDZHVum0VQ==",
+      "path": "netcoreaudio/1.6.3",
+      "hashPath": "netcoreaudio.1.6.3.nupkg.sha512"
+    },
     "NvAPIWrapper.Net/0.8.1.101": {
       "type": "package",
       "serviceable": true,
@@ -191,6 +225,13 @@
       "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
       "path": "system.security.principal.windows/4.7.0",
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
+    },
+    "VideoLAN.LibVLC.Mac/3.1.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jvqTJStnQLkWRLfhMp5SS1r9bJ4qYOJvEnU9gbQq1S3tjx+E8xYnBzli3ub80cMPS41CJxw1U6lUFUomPCEZjw==",
+      "path": "videolan.libvlc.mac/3.1.3.1",
+      "hashPath": "videolan.libvlc.mac.3.1.3.1.nupkg.sha512"
     }
   }
 }

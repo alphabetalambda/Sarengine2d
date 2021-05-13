@@ -24,7 +24,7 @@ using System.Diagnostics;
 
 namespace Sar_engine
 {
-    class Engine
+    public class Engine
     {
         public static string musicdir = @"./s/";
         public static bool exitgame = false;
@@ -114,7 +114,7 @@ namespace Sar_engine
                 Console.Write(".");
                 musicthread.Start();
 #if NOSDKS
-                Debug.log.WriteAsThread("not starting discord thread as current version is NoSDKs");
+                Debug.Log.WriteAsThread("not starting discord thread as current version is NoSDKs");
 #else
 #if NOSDKSLINUX
                 Debug.Log.WriteAsThread("not starting discord thread as current version is NoSDKs");
@@ -330,7 +330,8 @@ namespace Sar_engine
                 Console.ReadLine();
             }
         }
-#pragma warning restore IDE0059 // Unnecessary assignment of a value due to the nature of this being a engine
+#pragma warning restore IDE0059 // Unnecessary assignment of a value due to the nature of this being a engine but vs go brr i guess 
+#pragma warning disable IDE0044 // Because visual studio dosent understand the consept of not every last var needing to be read only
         public class Savesystem
         {
             public static void Save()
@@ -392,6 +393,7 @@ namespace Sar_engine
             public static int musicintent;
             public static void Musicthread()
             {
+                //even though there is no reason this shouldnt work on linux it doesnt even though this code was literaly written for linux
 #if NOSDKSLINUX
                 var themelen = new System.TimeSpan(0, 0, 59);
                 var musicplayer = new NetCoreAudio.Player();
@@ -477,6 +479,10 @@ namespace Sar_engine
                 {
                     Console.WriteLine("error the sound was not found");
                 }
+                catch (System.DllNotFoundException)
+                {
+                    Console.WriteLine("this build is for windows so no sound for you but otherwise everything works");
+                }
 #endif
             }
             private static void OnPlaybackFinished(object sender, EventArgs e)
@@ -509,6 +515,7 @@ namespace Sar_engine
         }
         public class DiscordSDK
         {
+            public static Stopwatch TimeOn = new Stopwatch();
             public static void SetStatusDetails(string Details)
             {
                 DiscordStatTxt = Details;
@@ -518,9 +525,9 @@ namespace Sar_engine
             static bool statusupdated = true;
             public static void Discordthread()
             {
-                Debug.Log.WriteAsThread("Thread started");
                 System.Threading.Thread.CurrentThread.Name = "Discord";
-                // Use your client ID from Discord's developer site.
+                Debug.Log.WriteAsThread("Thread started");
+                // Use your client ID from Discord's developer site. not mine
                 string clientID = null;
                 if (clientID == null)
                 {
@@ -548,18 +555,26 @@ namespace Sar_engine
 
                     }
                 });
+
+                Sar_engine.Engine.DiscordSDK.TimeOn.Start();
                 while (1 == 1)
                 {
                     if (statusupdated == true)
                     {
+                        TimeSpan TimeOnSpan = Sar_engine.Engine.DiscordSDK.TimeOn.Elapsed;
+                        Int64 TimeOnInt = Convert.ToInt64(TimeOnSpan.TotalSeconds);
                         var activitynew = new Discord.Activity
                         {
+                            Timestamps =
+                            {
+                                Start = TimeOnInt
+                            },
                             Details = DiscordStatTxt,
                             Assets =
                         {
                             LargeImage = "main-icon",
                             LargeText = "Saris Unbounded",
-                       }
+                        }
                         };
                         activitymanager.UpdateActivity(activitynew, (res) =>
                         {
@@ -669,6 +684,9 @@ namespace Sar_engine
                     public int value;
                 }
             }
+        }
+        public class EngineThreads
+        {
         }
     }
 }
