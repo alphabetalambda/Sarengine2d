@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Media;
+using System.Security;
+using System.Collections;
 #if NOSDKSLINUX
 using NetCoreAudio;
 #else
@@ -78,7 +80,7 @@ namespace Sar_engine
                 {
                     string ParsedWrite;
                     string ThreadName = System.Threading.Thread.CurrentThread.Name;
-                    ParsedWrite = $"[{ThreadName}] {ToWrite}";
+                    ParsedWrite = $"[{DateTime.Now.ToString("MM-dd-yyyy-h-mm-tt")}][{ThreadName}] {ToWrite}";
                     sb.AppendLine(ParsedWrite);
                     File.AppendAllText(logFile, sb.ToString());
                     sb.Clear();
@@ -92,6 +94,7 @@ namespace Sar_engine
             /// </summary>
             static public void Start()
             {
+                Engine.EngineThreads.Main = true;
                 System.Threading.Thread.CurrentThread.Name = "Main";
                 var debugfunctions = new Debug();
                 string[] enginename = { @"  ___   _   ___   ___           _          ", @" / __| /_\ | _ \ | __|_ _  __ _(_)_ _  ___ ", @" \__ \/ _ \|   / | _|| ' \/ _` | | ' \/ -_)", @" |___/_/ \_\_|_\ |___|_||_\__, |_|_||_\___|", @"                          |___/            " };
@@ -105,14 +108,23 @@ namespace Sar_engine
                 System.Threading.Thread.Sleep(3000);
                 Console.Write("loading");
                 Debug.Log.Start();
+                Console.Write(".");
                 Debug.Log.WriteAsThread("Logging started");
+                Console.Write(".");
                 System.Threading.ThreadStart musicref = new(Engine.Sound.Musicthread);
+                Console.Write(".");
+                System.Threading.ThreadStart diagnosticref = new(Engine.EngineThreads.DiagnosticDumperService.Start);
+                Console.Write(".");
                 System.Threading.ThreadStart discordref = new(Engine.DiscordSDK.Discordthread);
                 Console.Write(".");
                 System.Threading.Thread musicthread = new(musicref);
+                Console.Write(".");
                 System.Threading.Thread discordthread = new(discordref);
                 Console.Write(".");
+                System.Threading.Thread diagnosticthread = new(diagnosticref);
+                Console.Write(".");
                 musicthread.Start();
+                Console.Write(".");
 #if NOSDKS
                 Debug.Log.WriteAsThread("not starting discord thread as current version is NoSDKs");
 #else
@@ -120,8 +132,11 @@ namespace Sar_engine
                 Debug.Log.WriteAsThread("not starting discord thread as current version is NoSDKs");
 #else
                 discordthread.Start();
+                Console.Write(".");
 #endif
 #endif
+                diagnosticthread.Start();
+                Console.Write(".");
                 Console.WriteLine(" Done");
             }
         }
@@ -393,6 +408,7 @@ namespace Sar_engine
             public static int musicintent;
             public static void Musicthread()
             {
+                Engine.EngineThreads.Sound = true;
                 //even though there is no reason this shouldnt work on linux it doesnt even though this code was literaly written for linux
 #if NOSDKSLINUX
                 var themelen = new System.TimeSpan(0, 0, 59);
@@ -428,10 +444,12 @@ namespace Sar_engine
                 catch (System.IO.DirectoryNotFoundException)
                 {
                     Console.WriteLine("error the sounds folder was not found");
+                    Engine.EngineThreads.Sound = false;
                 }
                 catch (System.IO.FileNotFoundException)
                 {
                     Console.WriteLine("error the sound was not found");
+                    Engine.EngineThreads.Sound = false;
                 }
 
 #else
@@ -474,14 +492,17 @@ namespace Sar_engine
                 catch(System.IO.DirectoryNotFoundException) 
                 {
                     Console.WriteLine("error the sounds folder was not found");
+                    Engine.EngineThreads.Sound = false;
                 }
                 catch(System.IO.FileNotFoundException)
                 {
                     Console.WriteLine("error the sound was not found");
+                    Engine.EngineThreads.Sound = false;
                 }
                 catch (System.DllNotFoundException)
                 {
                     Console.WriteLine("this build is for windows so no sound for you but otherwise everything works");
+                    Engine.EngineThreads.Sound = false;
                 }
 #endif
             }
@@ -526,6 +547,7 @@ namespace Sar_engine
             public static void Discordthread()
             {
                 System.Threading.Thread.CurrentThread.Name = "Discord";
+                Engine.EngineThreads.Discord = true;
                 Debug.Log.WriteAsThread("Thread started");
                 // Use your client ID from Discord's developer site. not mine
                 string clientID = null;
@@ -589,6 +611,7 @@ namespace Sar_engine
                     Debug.Log.WriteAsThread("Updated status");
                     System.Threading.Thread.Sleep(4000);
                 }
+                Engine.EngineThreads.Discord = false;
             }
         }
         public class Gameclasses
@@ -687,6 +710,62 @@ namespace Sar_engine
         }
         public class EngineThreads
         {
+            public static bool Main = false;
+            public static bool Discord = false;
+            public static bool Sound = false;
+            public static bool Diagnostic = false;
+            public class DiagnosticDumperService
+            {
+                public static StringBuilder sb;
+                public static string DumpLocation;
+                public static void Setup()
+                {
+                    Diagnostic = true;
+                    string currentdatetime = DateTime.Now.ToString("MM-dd-yyyy-h-mm-tt");
+                    DumpLocation = @$"diagdump-{currentdatetime}.diagdump";
+                    sb = new StringBuilder();
+                }
+                public static void Start()
+                {
+                    System.Threading.Thread.CurrentThread.Name = "DiagnosticDumperService";
+                    Setup();
+                    //begin one time collection
+                    var os = Environment.OSVersion;
+                    WriteAsThread("Current OS Information:\n");
+                    string platform = os.Platform.ToString();
+                    WriteAsThread($"Platform: {platform}");
+                    string version = os.VersionString;
+                    WriteAsThread($"Version String: {version}");
+                    WriteAsThread("Version Information:");
+                    string majoros = os.Version.Major.ToString();
+                    WriteAsThread($"   Major: {majoros}");
+                    string minoros = os.Version.Minor.ToString();
+                    WriteAsThread($"   Minor: {minoros}");
+                    string servicepack = os.ServicePack.ToString();
+                    WriteAsThread($"Service Pack: '{servicepack}'");
+                    while (true)
+                    {
+                        WriteAsThread("Sar_engine IO:");
+                        WriteAsThread($"   Diagnostic Dumper Service ProcessorId: {System.Threading.Thread.GetCurrentProcessorId()}");
+                        WriteAsThread($"   Current Working Dir {System.IO.Directory.GetCurrentDirectory()}");
+                        WriteAsThread($"   MusicDir: {musicdir}");
+                        WriteAsThread($"   Savefile: {Engine.curFile}");
+                        WriteAsThread($"   Logfile: {logFile}");
+                        WriteAsThread($"Sar_engine Sound:");
+                        WriteAsThread($"   Running: {Engine.EngineThreads.Sound}");
+                        WriteAsThread($"   State: {Engine.Sound.musicintent}");
+                    }
+                }
+                public static void WriteAsThread(string ToWrite)
+                {
+                    string ParsedWrite;
+                    string ThreadName = System.Threading.Thread.CurrentThread.Name;
+                    ParsedWrite = $"[{DateTime.Now.ToString("MM-dd-yyyy-h-mm-tt")}][{ThreadName}] {ToWrite}";
+                    sb.AppendLine(ParsedWrite);
+                    File.AppendAllText(DumpLocation, sb.ToString());
+                    sb.Clear();
+                }
+            }
         }
     }
 }
