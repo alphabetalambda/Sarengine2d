@@ -24,3 +24,6 @@ C:\Users\lanen\source\repos\sa\Source\obj\x64\Debug\net5.0\Engine.pdb
 C:\Users\lanen\source\repos\sa\Source\obj\x64\Debug\net5.0\Engine.genruntimeconfig.cache
 C:\Users\lanen\source\repos\sa\Source\bin\x64\Debug\net5.0\NvAPIWrapper.dll
 C:\Users\lanen\source\repos\sa\Source\obj\x64\Debug\net5.0\Engine.csprojAssemblyReference.cache
+C:\Users\lanen\source\repos\sa\Source\bin\x64\Debug\net5.0\libvlc.dylib
+C:\Users\lanen\source\repos\sa\Source\bin\x64\Debug\net5.0\LibVLCSharp.dll
+C:\Users\lanen\source\repos\sa\Source\bin\x64\Debug\net5.0\NetCoreAudio.dll

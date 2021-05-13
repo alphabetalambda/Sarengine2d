@@ -1,3 +1,5 @@
+// This file was modified with the following fix:
+// https://github.com/discord/gamesdk-and-dispatch/issues/36
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -1069,8 +1071,10 @@ namespace Discord
                setLogHook.Value.Free();
             }
              setLogHook = GCHandle.Alloc(callback);
-            Methods.SetLogHook(MethodsPtr, minLevel, GCHandle.ToIntPtr(setLogHook.Value), SetLogHookCallbackImpl);
+            Methods.SetLogHook(MethodsPtr, minLevel, GCHandle.ToIntPtr(setLogHook.Value), SetLogHookCallbackDelegate);
         }
+
+        private readonly static FFIMethods.SetLogHookCallback SetLogHookCallbackDelegate = new FFIMethods.SetLogHookCallback(SetLogHookCallbackImpl);
 
         public ApplicationManager GetApplicationManager()
         {
@@ -1320,8 +1324,10 @@ namespace Discord
         public void ValidateOrExit(ValidateOrExitHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.ValidateOrExit(MethodsPtr, GCHandle.ToIntPtr(wrapped), ValidateOrExitCallbackImpl);
+            Methods.ValidateOrExit(MethodsPtr, GCHandle.ToIntPtr(wrapped), ValidateOrExitCallbackDelegate);
         }
+
+        private readonly static FFIMethods.ValidateOrExitCallback ValidateOrExitCallbackDelegate = new FFIMethods.ValidateOrExitCallback(ValidateOrExitCallbackImpl);
 
         public string GetCurrentLocale()
         {
@@ -1349,8 +1355,10 @@ namespace Discord
         public void GetOAuth2Token(GetOAuth2TokenHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.GetOAuth2Token(MethodsPtr, GCHandle.ToIntPtr(wrapped), GetOAuth2TokenCallbackImpl);
+            Methods.GetOAuth2Token(MethodsPtr, GCHandle.ToIntPtr(wrapped), GetOAuth2TokenCallbackDelegate);
         }
+
+        private readonly static FFIMethods.GetOAuth2TokenCallback GetOAuth2TokenCallbackDelegate = new FFIMethods.GetOAuth2TokenCallback(GetOAuth2TokenCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void GetTicketCallbackImpl(IntPtr ptr, Result result, ref string data)
@@ -1364,8 +1372,10 @@ namespace Discord
         public void GetTicket(GetTicketHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.GetTicket(MethodsPtr, GCHandle.ToIntPtr(wrapped), GetTicketCallbackImpl);
+            Methods.GetTicket(MethodsPtr, GCHandle.ToIntPtr(wrapped), GetTicketCallbackDelegate);
         }
+
+        private readonly static FFIMethods.GetTicketCallback GetTicketCallbackDelegate = new FFIMethods.GetTicketCallback(GetTicketCallbackImpl);
     }
 
     public partial class UserManager
@@ -1470,8 +1480,10 @@ namespace Discord
         public void GetUser(Int64 userId, GetUserHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.GetUser(MethodsPtr, userId, GCHandle.ToIntPtr(wrapped), GetUserCallbackImpl);
+            Methods.GetUser(MethodsPtr, userId, GCHandle.ToIntPtr(wrapped), GetUserCallbackDelegate);
         }
+
+        private readonly static FFIMethods.GetUserCallback GetUserCallbackDelegate = new FFIMethods.GetUserCallback(GetUserCallbackImpl);
 
         public PremiumType GetCurrentUserPremiumType()
         {
@@ -1585,8 +1597,10 @@ namespace Discord
         public void Fetch(ImageHandle handle, bool refresh, FetchHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.Fetch(MethodsPtr, handle, refresh, GCHandle.ToIntPtr(wrapped), FetchCallbackImpl);
+            Methods.Fetch(MethodsPtr, handle, refresh, GCHandle.ToIntPtr(wrapped), FetchCallbackDelegate);
         }
+
+        private readonly static FFIMethods.FetchCallback FetchCallbackDelegate = new FFIMethods.FetchCallback(FetchCallbackImpl);
 
         public ImageDimensions GetDimensions(ImageHandle handle)
         {
@@ -1783,8 +1797,10 @@ namespace Discord
         public void UpdateActivity(Activity activity, UpdateActivityHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.UpdateActivity(MethodsPtr, ref activity, GCHandle.ToIntPtr(wrapped), UpdateActivityCallbackImpl);
+            Methods.UpdateActivity(MethodsPtr, ref activity, GCHandle.ToIntPtr(wrapped), UpdateActivityCallbackDelegate);
         }
+
+        private readonly static FFIMethods.UpdateActivityCallback UpdateActivityCallbackDelegate = new FFIMethods.UpdateActivityCallback(UpdateActivityCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void ClearActivityCallbackImpl(IntPtr ptr, Result result)
@@ -1798,8 +1814,10 @@ namespace Discord
         public void ClearActivity(ClearActivityHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.ClearActivity(MethodsPtr, GCHandle.ToIntPtr(wrapped), ClearActivityCallbackImpl);
+            Methods.ClearActivity(MethodsPtr, GCHandle.ToIntPtr(wrapped), ClearActivityCallbackDelegate);
         }
+
+        private readonly static FFIMethods.ClearActivityCallback ClearActivityCallbackDelegate = new FFIMethods.ClearActivityCallback(ClearActivityCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void SendRequestReplyCallbackImpl(IntPtr ptr, Result result)
@@ -1813,8 +1831,10 @@ namespace Discord
         public void SendRequestReply(Int64 userId, ActivityJoinRequestReply reply, SendRequestReplyHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.SendRequestReply(MethodsPtr, userId, reply, GCHandle.ToIntPtr(wrapped), SendRequestReplyCallbackImpl);
+            Methods.SendRequestReply(MethodsPtr, userId, reply, GCHandle.ToIntPtr(wrapped), SendRequestReplyCallbackDelegate);
         }
+
+        private readonly static FFIMethods.SendRequestReplyCallback SendRequestReplyCallbackDelegate = new FFIMethods.SendRequestReplyCallback(SendRequestReplyCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void SendInviteCallbackImpl(IntPtr ptr, Result result)
@@ -1828,8 +1848,10 @@ namespace Discord
         public void SendInvite(Int64 userId, ActivityActionType type, string content, SendInviteHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.SendInvite(MethodsPtr, userId, type, content, GCHandle.ToIntPtr(wrapped), SendInviteCallbackImpl);
+            Methods.SendInvite(MethodsPtr, userId, type, content, GCHandle.ToIntPtr(wrapped), SendInviteCallbackDelegate);
         }
+
+        private readonly static FFIMethods.SendInviteCallback SendInviteCallbackDelegate = new FFIMethods.SendInviteCallback(SendInviteCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void AcceptInviteCallbackImpl(IntPtr ptr, Result result)
@@ -1843,8 +1865,10 @@ namespace Discord
         public void AcceptInvite(Int64 userId, AcceptInviteHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.AcceptInvite(MethodsPtr, userId, GCHandle.ToIntPtr(wrapped), AcceptInviteCallbackImpl);
+            Methods.AcceptInvite(MethodsPtr, userId, GCHandle.ToIntPtr(wrapped), AcceptInviteCallbackDelegate);
         }
+
+        private readonly static FFIMethods.AcceptInviteCallback AcceptInviteCallbackDelegate = new FFIMethods.AcceptInviteCallback(AcceptInviteCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void OnActivityJoinImpl(IntPtr ptr, string secret)
@@ -1991,9 +2015,11 @@ namespace Discord
         public void Filter(FilterHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.Filter(MethodsPtr, GCHandle.ToIntPtr(wrapped), FilterCallbackImpl);
+            Methods.Filter(MethodsPtr, GCHandle.ToIntPtr(wrapped), FilterCallbackDelegate);
             wrapped.Free();
         }
+
+        private readonly static FFIMethods.FilterCallback FilterCallbackDelegate = new FFIMethods.FilterCallback(FilterCallbackImpl);
 
         public Int32 Count()
         {
@@ -2440,9 +2466,11 @@ namespace Discord
         public void CreateLobby(LobbyTransaction transaction, CreateLobbyHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.CreateLobby(MethodsPtr, transaction.MethodsPtr, GCHandle.ToIntPtr(wrapped), CreateLobbyCallbackImpl);
+            Methods.CreateLobby(MethodsPtr, transaction.MethodsPtr, GCHandle.ToIntPtr(wrapped), CreateLobbyCallbackDelegate);
             transaction.MethodsPtr = IntPtr.Zero;
         }
+
+        private readonly static FFIMethods.CreateLobbyCallback CreateLobbyCallbackDelegate = new FFIMethods.CreateLobbyCallback(CreateLobbyCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void UpdateLobbyCallbackImpl(IntPtr ptr, Result result)
@@ -2456,9 +2484,11 @@ namespace Discord
         public void UpdateLobby(Int64 lobbyId, LobbyTransaction transaction, UpdateLobbyHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.UpdateLobby(MethodsPtr, lobbyId, transaction.MethodsPtr, GCHandle.ToIntPtr(wrapped), UpdateLobbyCallbackImpl);
+            Methods.UpdateLobby(MethodsPtr, lobbyId, transaction.MethodsPtr, GCHandle.ToIntPtr(wrapped), UpdateLobbyCallbackDelegate);
             transaction.MethodsPtr = IntPtr.Zero;
         }
+
+        private readonly static FFIMethods.UpdateLobbyCallback UpdateLobbyCallbackDelegate = new FFIMethods.UpdateLobbyCallback(UpdateLobbyCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void DeleteLobbyCallbackImpl(IntPtr ptr, Result result)
@@ -2472,8 +2502,10 @@ namespace Discord
         public void DeleteLobby(Int64 lobbyId, DeleteLobbyHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.DeleteLobby(MethodsPtr, lobbyId, GCHandle.ToIntPtr(wrapped), DeleteLobbyCallbackImpl);
+            Methods.DeleteLobby(MethodsPtr, lobbyId, GCHandle.ToIntPtr(wrapped), DeleteLobbyCallbackDelegate);
         }
+
+        private readonly static FFIMethods.DeleteLobbyCallback DeleteLobbyCallbackDelegate = new FFIMethods.DeleteLobbyCallback(DeleteLobbyCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void ConnectLobbyCallbackImpl(IntPtr ptr, Result result, ref Lobby lobby)
@@ -2487,8 +2519,10 @@ namespace Discord
         public void ConnectLobby(Int64 lobbyId, string secret, ConnectLobbyHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.ConnectLobby(MethodsPtr, lobbyId, secret, GCHandle.ToIntPtr(wrapped), ConnectLobbyCallbackImpl);
+            Methods.ConnectLobby(MethodsPtr, lobbyId, secret, GCHandle.ToIntPtr(wrapped), ConnectLobbyCallbackDelegate);
         }
+
+        private readonly static FFIMethods.ConnectLobbyCallback ConnectLobbyCallbackDelegate = new FFIMethods.ConnectLobbyCallback(ConnectLobbyCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void ConnectLobbyWithActivitySecretCallbackImpl(IntPtr ptr, Result result, ref Lobby lobby)
@@ -2502,8 +2536,10 @@ namespace Discord
         public void ConnectLobbyWithActivitySecret(string activitySecret, ConnectLobbyWithActivitySecretHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.ConnectLobbyWithActivitySecret(MethodsPtr, activitySecret, GCHandle.ToIntPtr(wrapped), ConnectLobbyWithActivitySecretCallbackImpl);
+            Methods.ConnectLobbyWithActivitySecret(MethodsPtr, activitySecret, GCHandle.ToIntPtr(wrapped), ConnectLobbyWithActivitySecretCallbackDelegate);
         }
+
+        private readonly static FFIMethods.ConnectLobbyWithActivitySecretCallback ConnectLobbyWithActivitySecretCallbackDelegate = new FFIMethods.ConnectLobbyWithActivitySecretCallback(ConnectLobbyWithActivitySecretCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void DisconnectLobbyCallbackImpl(IntPtr ptr, Result result)
@@ -2517,8 +2553,10 @@ namespace Discord
         public void DisconnectLobby(Int64 lobbyId, DisconnectLobbyHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.DisconnectLobby(MethodsPtr, lobbyId, GCHandle.ToIntPtr(wrapped), DisconnectLobbyCallbackImpl);
+            Methods.DisconnectLobby(MethodsPtr, lobbyId, GCHandle.ToIntPtr(wrapped), DisconnectLobbyCallbackDelegate);
         }
+
+        private readonly static FFIMethods.DisconnectLobbyCallback DisconnectLobbyCallbackDelegate = new FFIMethods.DisconnectLobbyCallback(DisconnectLobbyCallbackImpl);
 
         public Lobby GetLobby(Int64 lobbyId)
         {
@@ -2653,9 +2691,11 @@ namespace Discord
         public void UpdateMember(Int64 lobbyId, Int64 userId, LobbyMemberTransaction transaction, UpdateMemberHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.UpdateMember(MethodsPtr, lobbyId, userId, transaction.MethodsPtr, GCHandle.ToIntPtr(wrapped), UpdateMemberCallbackImpl);
+            Methods.UpdateMember(MethodsPtr, lobbyId, userId, transaction.MethodsPtr, GCHandle.ToIntPtr(wrapped), UpdateMemberCallbackDelegate);
             transaction.MethodsPtr = IntPtr.Zero;
         }
+
+        private readonly static FFIMethods.UpdateMemberCallback UpdateMemberCallbackDelegate = new FFIMethods.UpdateMemberCallback(UpdateMemberCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void SendLobbyMessageCallbackImpl(IntPtr ptr, Result result)
@@ -2669,8 +2709,10 @@ namespace Discord
         public void SendLobbyMessage(Int64 lobbyId, byte[] data, SendLobbyMessageHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.SendLobbyMessage(MethodsPtr, lobbyId, data, data.Length, GCHandle.ToIntPtr(wrapped), SendLobbyMessageCallbackImpl);
+            Methods.SendLobbyMessage(MethodsPtr, lobbyId, data, data.Length, GCHandle.ToIntPtr(wrapped), SendLobbyMessageCallbackDelegate);
         }
+
+        private readonly static FFIMethods.SendLobbyMessageCallback SendLobbyMessageCallbackDelegate = new FFIMethods.SendLobbyMessageCallback(SendLobbyMessageCallbackImpl);
 
         public LobbySearchQuery GetSearchQuery()
         {
@@ -2695,9 +2737,11 @@ namespace Discord
         public void Search(LobbySearchQuery query, SearchHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.Search(MethodsPtr, query.MethodsPtr, GCHandle.ToIntPtr(wrapped), SearchCallbackImpl);
+            Methods.Search(MethodsPtr, query.MethodsPtr, GCHandle.ToIntPtr(wrapped), SearchCallbackDelegate);
             query.MethodsPtr = IntPtr.Zero;
         }
+
+        private readonly static FFIMethods.SearchCallback SearchCallbackDelegate = new FFIMethods.SearchCallback(SearchCallbackImpl);
 
         public Int32 LobbyCount()
         {
@@ -2729,8 +2773,10 @@ namespace Discord
         public void ConnectVoice(Int64 lobbyId, ConnectVoiceHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.ConnectVoice(MethodsPtr, lobbyId, GCHandle.ToIntPtr(wrapped), ConnectVoiceCallbackImpl);
+            Methods.ConnectVoice(MethodsPtr, lobbyId, GCHandle.ToIntPtr(wrapped), ConnectVoiceCallbackDelegate);
         }
+
+        private readonly static FFIMethods.ConnectVoiceCallback ConnectVoiceCallbackDelegate = new FFIMethods.ConnectVoiceCallback(ConnectVoiceCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void DisconnectVoiceCallbackImpl(IntPtr ptr, Result result)
@@ -2744,8 +2790,10 @@ namespace Discord
         public void DisconnectVoice(Int64 lobbyId, DisconnectVoiceHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.DisconnectVoice(MethodsPtr, lobbyId, GCHandle.ToIntPtr(wrapped), DisconnectVoiceCallbackImpl);
+            Methods.DisconnectVoice(MethodsPtr, lobbyId, GCHandle.ToIntPtr(wrapped), DisconnectVoiceCallbackDelegate);
         }
+
+        private readonly static FFIMethods.DisconnectVoiceCallback DisconnectVoiceCallbackDelegate = new FFIMethods.DisconnectVoiceCallback(DisconnectVoiceCallbackImpl);
 
         public void ConnectNetwork(Int64 lobbyId)
         {
@@ -3238,8 +3286,10 @@ namespace Discord
         public void SetLocked(bool locked, SetLockedHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.SetLocked(MethodsPtr, locked, GCHandle.ToIntPtr(wrapped), SetLockedCallbackImpl);
+            Methods.SetLocked(MethodsPtr, locked, GCHandle.ToIntPtr(wrapped), SetLockedCallbackDelegate);
         }
+
+        private readonly static FFIMethods.SetLockedCallback SetLockedCallbackDelegate = new FFIMethods.SetLockedCallback(SetLockedCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void OpenActivityInviteCallbackImpl(IntPtr ptr, Result result)
@@ -3253,8 +3303,10 @@ namespace Discord
         public void OpenActivityInvite(ActivityActionType type, OpenActivityInviteHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.OpenActivityInvite(MethodsPtr, type, GCHandle.ToIntPtr(wrapped), OpenActivityInviteCallbackImpl);
+            Methods.OpenActivityInvite(MethodsPtr, type, GCHandle.ToIntPtr(wrapped), OpenActivityInviteCallbackDelegate);
         }
+
+        private readonly static FFIMethods.OpenActivityInviteCallback OpenActivityInviteCallbackDelegate = new FFIMethods.OpenActivityInviteCallback(OpenActivityInviteCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void OpenGuildInviteCallbackImpl(IntPtr ptr, Result result)
@@ -3268,8 +3320,10 @@ namespace Discord
         public void OpenGuildInvite(string code, OpenGuildInviteHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.OpenGuildInvite(MethodsPtr, code, GCHandle.ToIntPtr(wrapped), OpenGuildInviteCallbackImpl);
+            Methods.OpenGuildInvite(MethodsPtr, code, GCHandle.ToIntPtr(wrapped), OpenGuildInviteCallbackDelegate);
         }
+
+        private readonly static FFIMethods.OpenGuildInviteCallback OpenGuildInviteCallbackDelegate = new FFIMethods.OpenGuildInviteCallback(OpenGuildInviteCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void OpenVoiceSettingsCallbackImpl(IntPtr ptr, Result result)
@@ -3283,8 +3337,10 @@ namespace Discord
         public void OpenVoiceSettings(OpenVoiceSettingsHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.OpenVoiceSettings(MethodsPtr, GCHandle.ToIntPtr(wrapped), OpenVoiceSettingsCallbackImpl);
+            Methods.OpenVoiceSettings(MethodsPtr, GCHandle.ToIntPtr(wrapped), OpenVoiceSettingsCallbackDelegate);
         }
+
+        private readonly static FFIMethods.OpenVoiceSettingsCallback OpenVoiceSettingsCallbackDelegate = new FFIMethods.OpenVoiceSettingsCallback(OpenVoiceSettingsCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void OnToggleImpl(IntPtr ptr, bool locked)
@@ -3439,8 +3495,10 @@ namespace Discord
         public void ReadAsync(string name, ReadAsyncHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.ReadAsync(MethodsPtr, name, GCHandle.ToIntPtr(wrapped), ReadAsyncCallbackImpl);
+            Methods.ReadAsync(MethodsPtr, name, GCHandle.ToIntPtr(wrapped), ReadAsyncCallbackDelegate);
         }
+
+        private readonly static FFIMethods.ReadAsyncCallback ReadAsyncCallbackDelegate = new FFIMethods.ReadAsyncCallback(ReadAsyncCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void ReadAsyncPartialCallbackImpl(IntPtr ptr, Result result, IntPtr dataPtr, Int32 dataLen)
@@ -3456,8 +3514,10 @@ namespace Discord
         public void ReadAsyncPartial(string name, UInt64 offset, UInt64 length, ReadAsyncPartialHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.ReadAsyncPartial(MethodsPtr, name, offset, length, GCHandle.ToIntPtr(wrapped), ReadAsyncPartialCallbackImpl);
+            Methods.ReadAsyncPartial(MethodsPtr, name, offset, length, GCHandle.ToIntPtr(wrapped), ReadAsyncPartialCallbackDelegate);
         }
+
+        private readonly static FFIMethods.ReadAsyncPartialCallback ReadAsyncPartialCallbackDelegate = new FFIMethods.ReadAsyncPartialCallback(ReadAsyncPartialCallbackImpl);
 
         public void Write(string name, byte[] data)
         {
@@ -3480,8 +3540,10 @@ namespace Discord
         public void WriteAsync(string name, byte[] data, WriteAsyncHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.WriteAsync(MethodsPtr, name, data, data.Length, GCHandle.ToIntPtr(wrapped), WriteAsyncCallbackImpl);
+            Methods.WriteAsync(MethodsPtr, name, data, data.Length, GCHandle.ToIntPtr(wrapped), WriteAsyncCallbackDelegate);
         }
+
+        private readonly static FFIMethods.WriteAsyncCallback WriteAsyncCallbackDelegate = new FFIMethods.WriteAsyncCallback(WriteAsyncCallbackImpl);
 
         public void Delete(string name)
         {
@@ -3685,8 +3747,10 @@ namespace Discord
         public void FetchSkus(FetchSkusHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.FetchSkus(MethodsPtr, GCHandle.ToIntPtr(wrapped), FetchSkusCallbackImpl);
+            Methods.FetchSkus(MethodsPtr, GCHandle.ToIntPtr(wrapped), FetchSkusCallbackDelegate);
         }
+
+        private readonly static FFIMethods.FetchSkusCallback FetchSkusCallbackDelegate = new FFIMethods.FetchSkusCallback(FetchSkusCallbackImpl);
 
         public Int32 CountSkus()
         {
@@ -3729,8 +3793,10 @@ namespace Discord
         public void FetchEntitlements(FetchEntitlementsHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.FetchEntitlements(MethodsPtr, GCHandle.ToIntPtr(wrapped), FetchEntitlementsCallbackImpl);
+            Methods.FetchEntitlements(MethodsPtr, GCHandle.ToIntPtr(wrapped), FetchEntitlementsCallbackDelegate);
         }
+
+        private readonly static FFIMethods.FetchEntitlementsCallback FetchEntitlementsCallbackDelegate = new FFIMethods.FetchEntitlementsCallback(FetchEntitlementsCallbackImpl);
 
         public Int32 CountEntitlements()
         {
@@ -3784,8 +3850,10 @@ namespace Discord
         public void StartPurchase(Int64 skuId, StartPurchaseHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.StartPurchase(MethodsPtr, skuId, GCHandle.ToIntPtr(wrapped), StartPurchaseCallbackImpl);
+            Methods.StartPurchase(MethodsPtr, skuId, GCHandle.ToIntPtr(wrapped), StartPurchaseCallbackDelegate);
         }
+
+        private readonly static FFIMethods.StartPurchaseCallback StartPurchaseCallbackDelegate = new FFIMethods.StartPurchaseCallback(StartPurchaseCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void OnEntitlementCreateImpl(IntPtr ptr, ref Entitlement entitlement)
@@ -3942,8 +4010,10 @@ namespace Discord
         public void SetInputMode(InputMode inputMode, SetInputModeHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.SetInputMode(MethodsPtr, inputMode, GCHandle.ToIntPtr(wrapped), SetInputModeCallbackImpl);
+            Methods.SetInputMode(MethodsPtr, inputMode, GCHandle.ToIntPtr(wrapped), SetInputModeCallbackDelegate);
         }
+
+        private readonly static FFIMethods.SetInputModeCallback SetInputModeCallbackDelegate = new FFIMethods.SetInputModeCallback(SetInputModeCallbackImpl);
 
         public bool IsSelfMute()
         {
@@ -4138,8 +4208,10 @@ namespace Discord
         public void SetUserAchievement(Int64 achievementId, byte percentComplete, SetUserAchievementHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.SetUserAchievement(MethodsPtr, achievementId, percentComplete, GCHandle.ToIntPtr(wrapped), SetUserAchievementCallbackImpl);
+            Methods.SetUserAchievement(MethodsPtr, achievementId, percentComplete, GCHandle.ToIntPtr(wrapped), SetUserAchievementCallbackDelegate);
         }
+
+        private readonly static FFIMethods.SetUserAchievementCallback SetUserAchievementCallbackDelegate = new FFIMethods.SetUserAchievementCallback(SetUserAchievementCallbackImpl);
 
         [MonoPInvokeCallback]
         private static void FetchUserAchievementsCallbackImpl(IntPtr ptr, Result result)
@@ -4153,8 +4225,10 @@ namespace Discord
         public void FetchUserAchievements(FetchUserAchievementsHandler callback)
         {
             GCHandle wrapped = GCHandle.Alloc(callback);
-            Methods.FetchUserAchievements(MethodsPtr, GCHandle.ToIntPtr(wrapped), FetchUserAchievementsCallbackImpl);
+            Methods.FetchUserAchievements(MethodsPtr, GCHandle.ToIntPtr(wrapped), FetchUserAchievementsCallbackDelegate);
         }
+
+        private readonly static FFIMethods.FetchUserAchievementsCallback FetchUserAchievementsCallbackDelegate = new FFIMethods.FetchUserAchievementsCallback(FetchUserAchievementsCallbackImpl);
 
         public Int32 CountUserAchievements()
         {
