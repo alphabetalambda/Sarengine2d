@@ -537,7 +537,7 @@ namespace Sar_engine
         }
         public class DiscordSDK
         {
-            public static Stopwatch TimeOn = new();
+            //public static Stopwatch TimeOn = new();
             public static void SetStatusDetails(string Details)
             {
                 DiscordStatTxt = Details;
@@ -579,19 +579,19 @@ namespace Sar_engine
                     }
                 });
 
-                Sar_engine.Engine.DiscordSDK.TimeOn.Start();
+                //Sar_engine.Engine.DiscordSDK.TimeOn.Start();
                 while (1 == 1)
                 {
                     if (statusupdated == true)
                     {
-                        TimeSpan TimeOnSpan = Sar_engine.Engine.DiscordSDK.TimeOn.Elapsed;
-                        Int64 TimeOnInt = Convert.ToInt64(TimeOnSpan.TotalSeconds);
+                        //TimeSpan TimeOnSpan = Sar_engine.Engine.DiscordSDK.TimeOn.Elapsed;
+                        //Int64 TimeOnInt = Convert.ToInt64(TimeOnSpan.TotalSeconds);
                         var activitynew = new Discord.Activity
                         {
-                            Timestamps =
-                            {
-                                Start = TimeOnInt
-                            },
+                            //Timestamps =
+                            //{
+                            //    Start = TimeOnInt
+                            //},
                             Details = DiscordStatTxt,
                             Assets =
                         {
