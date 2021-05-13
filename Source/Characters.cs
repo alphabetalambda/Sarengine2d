@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Engine
+namespace Sar_engine
 {
     public class Characters
     {
-        public Sar_engine.Engine.Gameclasses.ClassesForCharacters.MainCharacter SarisCharacter = new()
+        Engine.Gameclasses.ClassesForCharacters.MainCharacter SarisCharacter = new()
         {
             Name = "Saris",
             HP = 100,

@@ -26,9 +26,8 @@ using System.Diagnostics;
 
 namespace Sar_engine
 {
-    public class Engine
+    class Engine
     {
-#pragma warning disable CA2211 // Non-constant fields should not be visible
         public static readonly string musicdir = @"./s/";
         public static bool exitgame;
         public static readonly string curFile = @"./save.sav";
@@ -36,7 +35,7 @@ namespace Sar_engine
         public static string state = "00000";
         public static int Readspeed = 2000;
         public static readonly string gamename = "Saris Unbounded";
-#pragma warning restore CA2211 // Non-constant fields should not be visible
+
         public class Debug
         {
             public static bool IsDebug

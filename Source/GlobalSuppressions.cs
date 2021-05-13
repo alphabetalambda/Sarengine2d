@@ -5,4 +5,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "<Pending>", Scope = "member", Target = "~F:Sar_engine.Engine.EngineThreads.Diagnostic")]
+[assembly: SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "because visual studio is being weird", Scope = "type", Target = "~T:Sar_engine.Engine.Savesystem")]
+[assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "bad idea", Scope = "member", Target = "~F:Sar_engine.Characters.SarisCharacter")]
+[assembly: SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "its just not used yet", Scope = "member", Target = "~F:Sar_engine.Characters.SarisCharacter")]
