@@ -8,7 +8,7 @@ namespace Engine
 {
     public class Characters
     {
-        public Sar_engine.Engine.Gameclasses.ClassesForCharacters.MainCharacter SarisCharacter = new Sar_engine.Engine.Gameclasses.ClassesForCharacters.MainCharacter
+        public Sar_engine.Engine.Gameclasses.ClassesForCharacters.MainCharacter SarisCharacter = new()
         {
             Name = "Saris",
             HP = 100,

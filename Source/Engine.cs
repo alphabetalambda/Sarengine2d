@@ -28,18 +28,17 @@ namespace Sar_engine
 {
     public class Engine
     {
-        public static string musicdir = @"./s/";
-        public static bool exitgame = false;
-        public static string curFile = @"./save.sav";
-        public static string logFile = @"./log.log";
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+        public static readonly string musicdir = @"./s/";
+        public static bool exitgame;
+        public static readonly string curFile = @"./save.sav";
+        public static readonly string logFile = @"./log.log";
         public static string state = "00000";
-        public static int readspeed = 2000;
-        public static string gamename = "Saris Unbounded";
+        public static int Readspeed = 2000;
+        public static readonly string gamename = "Saris Unbounded";
+#pragma warning restore CA2211 // Non-constant fields should not be visible
         public class Debug
         {
-            static string PROCESSORIDENTIFIER = Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER");
-            static string OS = System.Environment.GetEnvironmentVariable("OS");
-            static string PROCESSORARCHITECTURE = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE");
             public static bool IsDebug
             {
                 get
@@ -55,6 +54,9 @@ namespace Sar_engine
             }
             public static void Debugmenu()
             {
+                string PROCESSORIDENTIFIER = Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER");
+                string OS = System.Environment.GetEnvironmentVariable("OS");
+                string PROCESSORARCHITECTURE = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE");
                 Console.Write("PROCESSOR_IDENTIFIER: ");
                 Console.WriteLine(PROCESSORIDENTIFIER);
                 Console.Write("OS: ");
@@ -80,7 +82,7 @@ namespace Sar_engine
                 {
                     string ParsedWrite;
                     string ThreadName = System.Threading.Thread.CurrentThread.Name;
-                    ParsedWrite = $"[{DateTime.Now.ToString("MM-dd-yyyy-h-mm-tt")}][{ThreadName}] {ToWrite}";
+                    ParsedWrite = $"[{DateTime.Now:MM-dd-yyyy-h-mm-tt}][{ThreadName}] {ToWrite}";
                     sb.AppendLine(ParsedWrite);
                     File.AppendAllText(logFile, sb.ToString());
                     sb.Clear();
@@ -149,7 +151,7 @@ namespace Sar_engine
             public static void Write(string text)
             {
                 Console.WriteLine(text);
-                System.Threading.Thread.Sleep(readspeed);
+                System.Threading.Thread.Sleep(Readspeed);
             }
             /// <summary>
             /// prints as many lines as the window is tall
@@ -283,7 +285,7 @@ namespace Sar_engine
             public static void Writetext(string text)
             {
                 Console.WriteLine(text);
-                System.Threading.Thread.Sleep(readspeed);
+                System.Threading.Thread.Sleep(Readspeed);
             }
         }
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
@@ -353,7 +355,7 @@ namespace Sar_engine
             {
                 try
                 {
-                    string readspeedsave = readspeed.ToString();
+                    string readspeedsave = Readspeed.ToString();
                     string[] lines = { state, readspeedsave };
                     File.WriteAllLines(curFile, lines);
                     //SUG.Program.savegame(); ignore this it is a legacy 1 thing 
@@ -372,13 +374,13 @@ namespace Sar_engine
                 switch (exsistingsave)
                 {
                     case true:
-                        string[] lines2 = File.ReadAllLines(curFile);
-                        StreamReader readingFile = new StreamReader(curFile);
+                        _ = File.ReadAllLines(curFile);
+                        StreamReader readingFile = new(curFile);
                         state = readingFile.ReadLine();
                         string readspeedstring = readingFile.ReadLine();
                         try
                         {
-                            readspeed = Int32.Parse(readspeedstring);
+                            Readspeed = Int32.Parse(readspeedstring);
                         }
                         catch (FormatException)
                         {
@@ -394,7 +396,7 @@ namespace Sar_engine
                         Console.WriteLine("This seems to be the first time your playing the game so lets get some things set up");
                         Console.WriteLine("what is the speed(in ms) that lines should progress automaticaly?");
                         state = "00000";
-                        readspeed = Sar_engine.Engine.Userinput.GetInt32number(0,10000);
+                        Readspeed = Sar_engine.Engine.Userinput.GetInt32number(0,10000);
                         Save();
                         //SUG.Program.savegame(); old save function on the legacy 1 version
                         break;
@@ -511,7 +513,7 @@ namespace Sar_engine
                 musicintent = 1;
             }
         }
-        public class legacy2
+        public class Legacy2
         {
             public static string constatus;
             public static string cpustatus;
@@ -519,7 +521,7 @@ namespace Sar_engine
             public static string wanstatus;
             public static string storestatus;
             public static string lanstatus;
-            public static void status()
+            public static void Status()
             {
                 Console.WriteLine("PXos Cluster Control Server: " + constatus);
                 System.Threading.Thread.Sleep(50);
@@ -536,7 +538,7 @@ namespace Sar_engine
         }
         public class DiscordSDK
         {
-            public static Stopwatch TimeOn = new Stopwatch();
+            public static Stopwatch TimeOn = new();
             public static void SetStatusDetails(string Details)
             {
                 DiscordStatTxt = Details;
@@ -611,7 +613,10 @@ namespace Sar_engine
                     Debug.Log.WriteAsThread("Updated status");
                     System.Threading.Thread.Sleep(4000);
                 }
+
+#pragma warning disable CS0162 // Yes visual studio "Unreachable code detected" that is the joke, this thread shouldnt stop
                 Engine.EngineThreads.Discord = false;
+#pragma warning restore CS0162 // Unreachable code detected
             }
         }
         public class Gameclasses
@@ -622,7 +627,7 @@ namespace Sar_engine
                 {
                     private const int MAXIMUM_SLOTS_IN_INVENTORY = 10;
 
-                    public readonly List<InventoryRecord> InventoryRecords = new List<InventoryRecord>();
+                    public readonly List<InventoryRecord> InventoryRecords = new();
 
                     public void AddItem(ObtainableItem item, int quantityToAdd)
                     {
@@ -710,10 +715,11 @@ namespace Sar_engine
         }
         public class EngineThreads
         {
-            public static bool Main = false;
-            public static bool Discord = false;
-            public static bool Sound = false;
-            public static bool Diagnostic = false;
+            private const bool f = false;
+            public static bool Main = f;
+            public static bool Discord = f;
+            public static bool Sound = f;
+            public static bool Diagnostic = f;
             public class DiagnosticDumperService
             {
                 public static StringBuilder sb;
@@ -760,7 +766,7 @@ namespace Sar_engine
                 {
                     string ParsedWrite;
                     string ThreadName = System.Threading.Thread.CurrentThread.Name;
-                    ParsedWrite = $"[{DateTime.Now.ToString("MM-dd-yyyy-h-mm-tt")}][{ThreadName}] {ToWrite}";
+                    ParsedWrite = $"[{DateTime.Now:MM-dd-yyyy-h-mm-tt}][{ThreadName}] {ToWrite}";
                     sb.AppendLine(ParsedWrite);
                     File.AppendAllText(DumpLocation, sb.ToString());
                     sb.Clear();

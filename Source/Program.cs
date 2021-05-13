@@ -7,8 +7,9 @@ namespace Sar_engine
 {
     class Program
     {
-        static string[] boottext = { "[Ok] initializing kernel", "[Ok] initializing PXos core", "[Ok] initializing IPv4", "[Ok] initializing ipv6", "[Ok] initializing AI Handler", "[Ok] connecting to PXos WAN nodes", "[Failed] Authenticating with PXOS internal network", "[Ok] starting fallback operations", "[Ok] initialized virtual env", "[Ok] boot complete" };
-        static void Main(string[] args)
+        static readonly string[] boottext = { "[Ok] initializing kernel", "[Ok] initializing PXos core", "[Ok] initializing IPv4", "[Ok] initializing ipv6", "[Ok] initializing AI Handler", "[Ok] connecting to PXos WAN nodes", "[Failed] Authenticating with PXOS internal network", "[Ok] starting fallback operations", "[Ok] initialized virtual env", "[Ok] boot complete" };
+
+        private static void Main()
         {
             Engine.Startup.Start();
             Engine.Savesystem.Load();
