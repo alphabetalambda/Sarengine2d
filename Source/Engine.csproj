@@ -24,4 +24,10 @@
     <Folder Include="sounds\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="discord_game_sdk.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

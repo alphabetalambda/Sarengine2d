@@ -1,0 +1,17 @@
+[05-13-2021-2-15-PM][DiagnosticDumperService] Current OS Information:
+
+[05-13-2021-2-15-PM][DiagnosticDumperService] Platform: Unix
+[05-13-2021-2-15-PM][DiagnosticDumperService] Version String: Unix 5.4.72.2
+[05-13-2021-2-15-PM][DiagnosticDumperService] Version Information:
+[05-13-2021-2-15-PM][DiagnosticDumperService]    Major: 5
+[05-13-2021-2-15-PM][DiagnosticDumperService]    Minor: 4
+[05-13-2021-2-15-PM][DiagnosticDumperService] Service Pack: ''
+[05-13-2021-2-15-PM][DiagnosticDumperService] Sar_engine IO:
+[05-13-2021-2-15-PM][DiagnosticDumperService]    Diagnostic Dumper Service ProcessorId: 3
+[05-13-2021-2-15-PM][DiagnosticDumperService]    Current Working Dir /mnt/c/Users/lanen/source/repos/sa/Source/bin/x64/NoSDKslinux/net5.0
+[05-13-2021-2-15-PM][DiagnosticDumperService]    MusicDir: ./s/
+[05-13-2021-2-15-PM][DiagnosticDumperService]    Savefile: ./save.sav
+[05-13-2021-2-15-PM][DiagnosticDumperService]    Logfile: ./log.log
+[05-13-2021-2-15-PM][DiagnosticDumperService] Sar_engine Sound:
+[05-13-2021-2-15-PM][DiagnosticDumperService]    Running: True
+[05-13-2021-2-15-PM][DiagnosticDumperService]    State: 0

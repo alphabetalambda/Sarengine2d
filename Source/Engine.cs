@@ -136,7 +136,9 @@ namespace Sar_engine
                 Console.Write(".");
 #endif
 #endif
+#if Debug
                 diagnosticthread.Start();
+#endif
                 Console.Write(".");
                 Console.WriteLine(" Done");
             }
@@ -759,6 +761,7 @@ namespace Sar_engine
                         WriteAsThread($"Sar_engine Sound:");
                         WriteAsThread($"   Running: {Engine.EngineThreads.Sound}");
                         WriteAsThread($"   State: {Engine.Sound.musicintent}");
+                        System.Threading.Thread.Sleep(300);
                     }
                 }
                 public static void WriteAsThread(string ToWrite)

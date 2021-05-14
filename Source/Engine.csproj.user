@@ -3,5 +3,9 @@
   <PropertyGroup>
     <_LastSelectedProfileId>C:\Users\lanen\source\repos\sa\Source\Properties\PublishProfiles\FolderProfile1.pubxml</_LastSelectedProfileId>
     <ShowAllFiles>true</ShowAllFiles>
+    <ActiveDebugProfile>WSL 2</ActiveDebugProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NoSDKslinux|x64'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
