@@ -28,6 +28,7 @@ namespace Sar_engine
 {
     class Engine
     {
+        public static readonly string EngVer = "A1.0.0";
         public static readonly string musicdir = @"./s/";
         public static bool exitgame;
         public static readonly string curFile = @"./save.sav";
