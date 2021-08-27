@@ -22,6 +22,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./Source/Engine.sln
     - name: Build
-      run: dotnet build --no-restore 
+      run: dotnet build --no-restore ./Source/Engine.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal 
+      run: dotnet test --no-build --verbosity normal ./Source/Engine.sln
