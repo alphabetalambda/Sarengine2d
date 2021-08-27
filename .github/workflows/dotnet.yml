@@ -20,7 +20,7 @@ jobs:
     - name: move
       run: cd ./Source
     - name: Restore dependencies
-      run: dotnet restore Engine.sln
+      run: dotnet restore ./Source/Engine.sln
     - name: Build
       run: dotnet build --no-restore 
     - name: Test
