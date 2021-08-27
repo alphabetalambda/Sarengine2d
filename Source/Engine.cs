@@ -405,6 +405,12 @@ namespace Sar_engine
                 }
             }
         }
+        public class warnings
+        {
+            public static void errorbox()
+            {
+            }
+        }
         public class Sound
         {
 #if NOSDKSLINUX
