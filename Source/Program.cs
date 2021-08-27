@@ -29,7 +29,8 @@ namespace Sar_engine
                         System.Threading.Thread.Sleep(700);
                         Engine.Screen.Drawmenu();
                         Engine.Userinput.Waitforinput();
-                        Engine.Screen.Writetext("you wake up in a flat grassy area and imeadatly feel your head throbing");                                                         
+                        Engine.Screen.Writetext("you wake up in a flat grassy area and imeadatly feel your head throbing");
+                        Engine.Screen.Writetext("where am i?");
                         break;
                     default:
                         Console.WriteLine("invalid state");

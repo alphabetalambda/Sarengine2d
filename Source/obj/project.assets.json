@@ -536,11 +536,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lanen\\source\\repos\\sa\\Source\\Engine.csproj",
+      "projectUniqueName": "C:\\Users\\lanen\\Source\\Repos\\alphabetalambda\\Sarengine2d\\Source\\Engine.csproj",
       "projectName": "Engine",
-      "projectPath": "C:\\Users\\lanen\\source\\repos\\sa\\Source\\Engine.csproj",
+      "projectPath": "C:\\Users\\lanen\\Source\\Repos\\alphabetalambda\\Sarengine2d\\Source\\Engine.csproj",
       "packagesPath": "C:\\Users\\lanen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lanen\\source\\repos\\sa\\Source\\obj\\",
+      "outputPath": "C:\\Users\\lanen\\Source\\Repos\\alphabetalambda\\Sarengine2d\\Source\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
