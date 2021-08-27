@@ -19,8 +19,10 @@ jobs:
         dotnet-version: 5.0.x
     - name: move
       run: cd ./Source
+    - name: ls
+      run: curdir
     - name: Restore dependencies
-      run: dotnet restore 
+      run: dotnet restore Engine.sln
     - name: Build
       run: dotnet build --no-restore 
     - name: Test
