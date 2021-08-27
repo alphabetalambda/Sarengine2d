@@ -20,8 +20,8 @@ jobs:
     - name: move
       run: cd ./Source
     - name: Restore dependencies
-      run: dotnet restore ./source
+      run: dotnet restore 
     - name: Build
-      run: dotnet build --no-restore ./source
+      run: dotnet build --no-restore 
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./source
+      run: dotnet test --no-build --verbosity normal 
