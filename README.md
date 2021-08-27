@@ -1,3 +1,4 @@
+[![.NET Core Desktop](https://github.com/alphabetalambda/Sarengine2d/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/alphabetalambda/Sarengine2d/actions/workflows/dotnet-desktop.yml)
 # README #
 
 This Readme is to get you started with the SAR Engine
