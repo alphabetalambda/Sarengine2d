@@ -1,5 +1,5 @@
 [![.NET](https://github.com/alphabetalambda/Sarengine2d/actions/workflows/dotnet.yml/badge.svg)](https://github.com/alphabetalambda/Sarengine2d/actions/workflows/dotnet.yml)
-[![CircleCI](https://circleci.com/gh/alphabetalambda/Sarengine2d/tree/master.svg?style=svg&circle-token=9d23264086f6ff4d7c82f1db0070880ab4ced027)](https://circleci.com/gh/alphabetalambda/Sarengine2d/tree/master)
+[![CircleCI](https://circleci.com/gh/alphabetalambda/Sarengine2d/tree/master.svg?style=shield&circle-token=9d23264086f6ff4d7c82f1db0070880ab4ced027)](https://circleci.com/gh/alphabetalambda/Sarengine2d/tree/master)
 # README #
 
 This Readme is to get you started with the SAR Engine
