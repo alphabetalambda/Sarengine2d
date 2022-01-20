@@ -31,6 +31,29 @@ namespace Sar_engine
                         Engine.Userinput.Waitforinput();
                         Engine.Screen.Writetext("you wake up in a flat grassy area and imeadatly feel your head throbing");
                         Engine.Screen.Writetext("where am i?");
+                        bool exitloop1 = false;
+                        int choice = 0;
+                        while(exitloop1== false)
+                        {
+                            Engine.Screen.Writetext("chose 1 2 or 3");
+                            choice = Engine.Userinput.GetInt32number(1,3);
+                            switch (choice)
+                            {
+                                case 1:
+                                    Engine.Screen.Writetext("choice 1");
+                                    exitloop1 = true;
+                                    break;
+                                case 2:
+                                    Engine.Screen.Writetext("choice 2");
+                                    exitloop1 = true;
+                                    break;
+                                case 3:
+                                    Engine.Screen.Writetext("choice 3");
+                                    exitloop1 = true;
+                                    break;
+                            }
+
+                        }
                         break;
                     default:
                         Console.WriteLine("invalid state");
